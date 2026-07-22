@@ -1,0 +1,42 @@
+name: Generate Projects List
+
+on:
+  push:
+    paths:
+      - 'projects/**'
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Generate JSON list
+        run: |
+          node -e '
+            const fs = require("fs");
+            const path = require("path");
+            const dir = "./projects";
+            if (!fs.existsSync(dir)) process.exit(0);
+            const files = fs.readdirSync(dir)
+              .filter(f => f.endsWith(".html"))
+              .map(f => {
+                const stat = fs.statSync(path.join(dir, f));
+                return { name: f.replace(".html", ""), filename: f, mtime: stat.mtimeMs };
+              })
+              .sort((a, b) => b.mtime - a.mtime);
+            fs.writeFileSync("projects.json", JSON.stringify(files, null, 2));
+          '
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add projects.json
+          git commit -m "Auto-update projects.json [skip ci]" || exit 0
+          git push

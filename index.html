@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Output Archive</title>
-  <!-- Pretendard Web Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <style>
     :root {
@@ -17,6 +16,8 @@
       --accent-color: #38bdf8;
       --accent-glow: rgba(56, 189, 248, 0.15);
       --input-bg: #111827;
+      --tag-bg: rgba(56, 189, 248, 0.1);
+      --tag-border: rgba(56, 189, 248, 0.25);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,10 +30,7 @@
       min-height: 100vh;
     }
 
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-    }
+    .container { max-width: 960px; margin: 0 auto; }
 
     /* Hero Section */
     .hero {
@@ -66,16 +64,8 @@
       border-radius: 20px;
     }
 
-    .hero-title p {
-      color: var(--text-muted);
-      font-size: 15px;
-      margin-top: 8px;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 16px;
-    }
+    .hero-title p { color: var(--text-muted); font-size: 15px; margin-top: 8px; }
+    .hero-stats { display: flex; gap: 16px; }
 
     .stat-card {
       background: var(--card-bg);
@@ -85,31 +75,12 @@
       text-align: right;
     }
 
-    .stat-card .value {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--accent-color);
-    }
+    .stat-card .value { font-size: 20px; font-weight: 700; color: var(--accent-color); }
+    .stat-card .label { font-size: 12px; color: var(--text-muted); }
 
-    .stat-card .label {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* Controls (Search & Sort) */
-    .controls {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
-    }
-
-    .search-box {
-      flex: 1;
-      min-width: 240px;
-      position: relative;
-    }
-
+    /* Controls */
+    .controls { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+    .search-box { flex: 1; min-width: 240px; position: relative; }
     .search-box input {
       width: 100%;
       background: var(--input-bg);
@@ -150,16 +121,8 @@
       outline: none;
     }
 
-    .sort-select:focus {
-      border-color: var(--accent-color);
-    }
-
-    /* Grid & Cards */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
+    /* Cards & Tags */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 
     .card {
       background: var(--card-bg);
@@ -171,7 +134,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 140px;
+      min-height: 160px;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -181,26 +144,20 @@
       box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--accent-glow);
     }
 
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
+    .card-header { display: flex; align-items: flex-start; gap: 12px; }
+    .card-icon { font-size: 22px; line-height: 1; padding: 8px; background: rgba(255, 255, 255, 0.04); border-radius: 8px; }
+    .card h3 { font-size: 16px; font-weight: 600; color: var(--text-main); word-break: break-keep; line-height: 1.4; }
 
-    .card-icon {
-      font-size: 22px;
-      line-height: 1;
-      padding: 8px;
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 8px;
-    }
-
-    .card h3 {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-main);
-      word-break: break-keep;
-      line-height: 1.4;
+    /* Tag Badges */
+    .tag-container { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+    .tag {
+      font-size: 11px;
+      color: var(--accent-color);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 500;
     }
 
     .card-footer {
@@ -214,20 +171,8 @@
       color: var(--text-muted);
     }
 
-    .card-link-text {
-      color: var(--accent-color);
-      font-weight: 500;
-    }
-
-    .empty-msg {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 60px 0;
-      color: var(--text-muted);
-      background: var(--card-bg);
-      border: 1px dashed var(--card-border);
-      border-radius: 14px;
-    }
+    .card-link-text { color: var(--accent-color); font-weight: 500; }
+    .empty-msg { grid-column: 1 / -1; text-align: center; padding: 60px 0; color: var(--text-muted); background: var(--card-bg); border: 1px dashed var(--card-border); border-radius: 14px; }
 
     @media (max-width: 600px) {
       .hero { flex-direction: column; align-items: flex-start; }
@@ -238,7 +183,6 @@
 </head>
 <body>
   <div class="container">
-    <!-- Hero Section -->
     <header class="hero">
       <div class="hero-title">
         <h1>AI Archive <span class="badge">LIVE</span></h1>
@@ -252,10 +196,9 @@
       </div>
     </header>
 
-    <!-- Controls -->
     <div class="controls">
       <div class="search-box">
-        <input type="text" id="search-input" placeholder="프로젝트 검색..." oninput="handleFilter()">
+        <input type="text" id="search-input" placeholder="제목 또는 #태그 검색..." oninput="handleFilter()">
       </div>
       <select class="sort-select" id="sort-select" onchange="handleFilter()">
         <option value="latest">최신순</option>
@@ -264,18 +207,14 @@
       </select>
     </div>
 
-    <!-- Main Card Grid -->
     <main>
-      <div id="project-list" class="card-grid">
-        <!-- JS로 동적 생성 -->
-      </div>
+      <div id="project-list" class="card-grid"></div>
     </main>
   </div>
 
   <script>
     let rawProjects = [];
 
-    // 키워드별 아이콘 자동 매칭 함수
     function getIcon(name) {
       if (name.includes('브랜딩') || name.includes('디자인')) return '🎨';
       if (name.includes('벤치마킹') || name.includes('금융') || name.includes('분석')) return '📊';
@@ -295,10 +234,7 @@
         handleFilter();
       } catch (err) {
         console.error(err);
-        document.getElementById('project-list').innerHTML = `
-          <div class="empty-msg">
-            아직 업로드된 작업물이 없거나 데이터 불러오기에 실패했습니다.
-          </div>`;
+        document.getElementById('project-list').innerHTML = `<div class="empty-msg">목록을 불러오는 중 오류가 발생했습니다.</div>`;
       }
     }
 
@@ -307,19 +243,16 @@
       const sortType = document.getElementById('sort-select').value;
       const container = document.getElementById('project-list');
 
-      // 1. Filter
-      let filtered = rawProjects.filter(p => p.name.toLowerCase().includes(query));
+      let filtered = rawProjects.filter(p => {
+        const nameMatch = p.name.toLowerCase().includes(query);
+        const tagMatch = p.tags && p.tags.some(t => t.toLowerCase().includes(query.replace('#', '')));
+        return nameMatch || tagMatch;
+      });
 
-      // 2. Sort
-      if (sortType === 'latest') {
-        filtered.sort((a, b) => b.mtime - a.mtime);
-      } else if (sortType === 'oldest') {
-        filtered.sort((a, b) => a.mtime - b.mtime);
-      } else if (sortType === 'name') {
-        filtered.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
-      }
+      if (sortType === 'latest') filtered.sort((a, b) => b.mtime - a.mtime);
+      else if (sortType === 'oldest') filtered.sort((a, b) => a.mtime - b.mtime);
+      else if (sortType === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
 
-      // 3. Render
       if (filtered.length === 0) {
         container.innerHTML = `<div class="empty-msg">검색 결과가 없습니다.</div>`;
         return;
@@ -327,11 +260,18 @@
 
       container.innerHTML = filtered.map(item => {
         const icon = getIcon(item.name);
+        const tagsHtml = (item.tags || []).map(t => `<span class="tag">#${t}</span>`).join('');
+
         return `
           <a href="./projects/${encodeURIComponent(item.filename)}" class="card" target="_blank">
-            <div class="card-header">
-              <span class="card-icon">${icon}</span>
-              <h3>${item.name}</h3>
+            <div>
+              <div class="card-header">
+                <span class="card-icon">${icon}</span>
+                <h3>${item.name}</h3>
+              </div>
+              <div class="tag-container">
+                ${tagsHtml}
+              </div>
             </div>
             <div class="card-footer">
               <span>웹 렌더링</span>

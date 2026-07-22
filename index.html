@@ -16,8 +16,6 @@
       --accent-color: #38bdf8;
       --accent-glow: rgba(56, 189, 248, 0.15);
       --input-bg: #111827;
-      --tag-bg: rgba(56, 189, 248, 0.1);
-      --tag-border: rgba(56, 189, 248, 0.25);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -121,7 +119,7 @@
       outline: none;
     }
 
-    /* Cards & Tags */
+    /* Card Grid */
     .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 
     .card {
@@ -134,7 +132,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 160px;
+      min-height: 130px;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -146,19 +144,7 @@
 
     .card-header { display: flex; align-items: flex-start; gap: 12px; }
     .card-icon { font-size: 22px; line-height: 1; padding: 8px; background: rgba(255, 255, 255, 0.04); border-radius: 8px; }
-    .card h3 { font-size: 16px; font-weight: 600; color: var(--text-main); word-break: break-keep; line-height: 1.4; }
-
-    /* Tag Badges */
-    .tag-container { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
-    .tag {
-      font-size: 11px;
-      color: var(--accent-color);
-      background: var(--tag-bg);
-      border: 1px solid var(--tag-border);
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-weight: 500;
-    }
+    .card h3 { font-size: 16px; font-weight: 600; color: var(--text-main); word-break: break-all; line-height: 1.4; }
 
     .card-footer {
       display: flex;
@@ -198,7 +184,7 @@
 
     <div class="controls">
       <div class="search-box">
-        <input type="text" id="search-input" placeholder="제목 또는 #태그 검색..." oninput="handleFilter()">
+        <input type="text" id="search-input" placeholder="프로젝트 제목 검색..." oninput="handleFilter()">
       </div>
       <select class="sort-select" id="sort-select" onchange="handleFilter()">
         <option value="latest">최신순</option>
@@ -214,15 +200,6 @@
 
   <script>
     let rawProjects = [];
-
-    function getIcon(name) {
-      if (name.includes('브랜딩') || name.includes('디자인')) return '🎨';
-      if (name.includes('벤치마킹') || name.includes('금융') || name.includes('분석')) return '📊';
-      if (name.includes('AI') || name.includes('모델')) return '🤖';
-      if (name.includes('기획') || name.includes('전략')) return '💡';
-      if (name.includes('보고서') || name.includes('요약')) return '📝';
-      return '📄';
-    }
 
     async function fetchProjects() {
       try {
@@ -243,11 +220,7 @@
       const sortType = document.getElementById('sort-select').value;
       const container = document.getElementById('project-list');
 
-      let filtered = rawProjects.filter(p => {
-        const nameMatch = p.name.toLowerCase().includes(query);
-        const tagMatch = p.tags && p.tags.some(t => t.toLowerCase().includes(query.replace('#', '')));
-        return nameMatch || tagMatch;
-      });
+      let filtered = rawProjects.filter(p => p.name.toLowerCase().includes(query));
 
       if (sortType === 'latest') filtered.sort((a, b) => b.mtime - a.mtime);
       else if (sortType === 'oldest') filtered.sort((a, b) => a.mtime - b.mtime);
@@ -259,19 +232,11 @@
       }
 
       container.innerHTML = filtered.map(item => {
-        const icon = getIcon(item.name);
-        const tagsHtml = (item.tags || []).map(t => `<span class="tag">#${t}</span>`).join('');
-
         return `
           <a href="./projects/${encodeURIComponent(item.filename)}" class="card" target="_blank">
-            <div>
-              <div class="card-header">
-                <span class="card-icon">${icon}</span>
-                <h3>${item.name}</h3>
-              </div>
-              <div class="tag-container">
-                ${tagsHtml}
-              </div>
+            <div class="card-header">
+              <span class="card-icon">📄</span>
+              <h3>${item.name}</h3>
             </div>
             <div class="card-footer">
               <span>웹 렌더링</span>

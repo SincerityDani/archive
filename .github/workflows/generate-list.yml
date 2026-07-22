@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Generate JSON list with Auto Tags
+      - name: Generate JSON list
         run: |
           node -e '
             const fs = require("fs");
@@ -25,45 +25,14 @@ jobs:
             const dir = "./projects";
             if (!fs.existsSync(dir)) process.exit(0);
 
-            // 한글/영문 키워드 사전
-            const keywordMap = [
-              { key: ["HR", "성과", "evaluation", "finance", "금융", "벤치마킹", "benchmark"], tag: "성과/금융" },
-              { key: ["브랜딩", "branding", "디자인", "design", "recommendation"], tag: "브랜딩" },
-              { key: ["AI", "LLM", "gpt", "모델"], tag: "AI" },
-              { key: ["교육", "training", "가이드", "보고서"], tag: "리포트" },
-              { key: ["기획", "전략", "system", "시스템"], tag: "기획" }
-            ];
-
             const files = fs.readdirSync(dir)
               .filter(f => f.endsWith(".html"))
               .map(f => {
-                const filePath = path.join(dir, f);
-                const stat = fs.statSync(filePath);
-                const content = fs.readFileSync(filePath, "utf8");
-
-                // HTML 태그 제거 후 텍스트 추출
-                const plainText = content.replace(/<[^>]+>/g, " ");
-                const targetText = (f + " " + plainText).toLowerCase();
-
-                const tags = new Set();
-
-                keywordMap.forEach(item => {
-                  if (item.key.some(k => targetText.includes(k.toLowerCase()))) {
-                    tags.add(item.tag);
-                  }
-                });
-
-                // 매칭되는 게 없으면 기본 태그 부여
-                if (tags.size === 0) {
-                  tags.add("AI");
-                  tags.add("결과물");
-                }
-
+                const stat = fs.statSync(path.join(dir, f));
                 return { 
                   name: f.replace(".html", ""), 
                   filename: f, 
-                  mtime: stat.mtimeMs,
-                  tags: Array.from(tags).slice(0, 3)
+                  mtime: stat.mtimeMs
                 };
               })
               .sort((a, b) => b.mtime - a.mtime);
@@ -76,5 +45,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add projects.json
-          git commit -m "Auto-update projects.json with smart tags [skip ci]" || exit 0
+          git commit -m "Auto-update projects.json [skip ci]" || exit 0
           git push

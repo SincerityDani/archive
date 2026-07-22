@@ -6,6 +6,7 @@ on:
       - 'projects/**'
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,10 +25,13 @@ jobs:
             const dir = "./projects";
             if (!fs.existsSync(dir)) process.exit(0);
 
-            // 주요 키워드 사전 (필요시 단어 추가 가능)
-            const keywordDict = [
-              "HR", "성과체계", "브랜딩", "벤치마킹", "평가", "교육", "AI", "프롬프트", 
-              "금융", "전략", "기획", "디자인", "보고서", "가이드", "역량", "채용", "조직"
+            // 한글/영문 키워드 사전
+            const keywordMap = [
+              { key: ["HR", "성과", "evaluation", "finance", "금융", "벤치마킹", "benchmark"], tag: "성과/금융" },
+              { key: ["브랜딩", "branding", "디자인", "design", "recommendation"], tag: "브랜딩" },
+              { key: ["AI", "LLM", "gpt", "모델"], tag: "AI" },
+              { key: ["교육", "training", "가이드", "보고서"], tag: "리포트" },
+              { key: ["기획", "전략", "system", "시스템"], tag: "기획" }
             ];
 
             const files = fs.readdirSync(dir)
@@ -37,27 +41,29 @@ jobs:
                 const stat = fs.statSync(filePath);
                 const content = fs.readFileSync(filePath, "utf8");
 
-                // HTML 태그 제거 후 순수 텍스트만 추출
+                // HTML 태그 제거 후 텍스트 추출
                 const plainText = content.replace(/<[^>]+>/g, " ");
+                const targetText = (f + " " + plainText).toLowerCase();
 
-                // 본문 및 파일명에서 키워드 빈도 추출
-                const tags = [];
-                const fullNameAndContent = f + " " + plainText;
+                const tags = new Set();
 
-                keywordDict.forEach(kw => {
-                  if (fullNameAndContent.includes(kw)) {
-                    tags.push(kw);
+                keywordMap.forEach(item => {
+                  if (item.key.some(k => targetText.includes(k.toLowerCase()))) {
+                    tags.add(item.tag);
                   }
                 });
 
-                // 최대 3개 태그만 추출
-                const finalTags = tags.slice(0, 3);
+                // 매칭되는 게 없으면 기본 태그 부여
+                if (tags.size === 0) {
+                  tags.add("AI");
+                  tags.add("결과물");
+                }
 
                 return { 
                   name: f.replace(".html", ""), 
                   filename: f, 
                   mtime: stat.mtimeMs,
-                  tags: finalTags
+                  tags: Array.from(tags).slice(0, 3)
                 };
               })
               .sort((a, b) => b.mtime - a.mtime);
@@ -70,5 +76,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add projects.json
-          git commit -m "Auto-update projects.json with tags [skip ci]" || exit 0
+          git commit -m "Auto-update projects.json with smart tags [skip ci]" || exit 0
           git push

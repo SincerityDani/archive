@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>인사제도 개편 옵션 2x2 매트릭스</title>
+<style>
+    /* Apple 스타일 기본 폰트 및 리셋 */
+    :root {
+        --apple-blue: #0071e3;
+        --bg-color: #fbfbfd;
+        --text-main: #1d1d1f;
+        --text-sub: #86868b;
+        --grid-line: #d2d2d7;
+    }
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Helvetica Neue", Arial, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        margin: 0;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        letter-spacing: -0.01em;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0 0 10px 0;
+    }
+
+    .header p {
+        font-size: 15px;
+        color: var(--text-sub);
+        margin: 0;
+    }
+
+    /* 매트릭스 컨테이너 */
+    .matrix-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        aspect-ratio: 1 / 1;
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        padding: 40px;
+        box-sizing: border-box;
+    }
+
+    /* 축 라벨 */
+    .axis-label {
+        position: absolute;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-sub);
+        letter-spacing: 0.05em;
+    }
+    .axis-y-top { top: 15px; left: 50%; transform: translateX(-50%); }
+    .axis-y-bottom { bottom: 15px; left: 50%; transform: translateX(-50%); }
+    .axis-x-left { top: 50%; left: 15px; transform: translateY(-50%) rotate(-90deg); }
+    .axis-x-right { top: 50%; right: 15px; transform: translateY(-50%) rotate(90deg); }
+
+    /* 2x2 그리드 */
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    /* 십자선 (X, Y축) */
+    .grid-container::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: var(--grid-line);
+        z-index: 0;
+    }
+    .grid-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background-color: var(--grid-line);
+        z-index: 0;
+    }
+
+    /* 각 사분면 */
+    .quadrant {
+        position: relative;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 1;
+    }
+
+    .quadrant-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #1d1d1f;
+        margin-bottom: 10px;
+        opacity: 0.8;
+    }
+
+    /* 아이템 카드 UI */
+    .card {
+        background: #ffffff;
+        border: 1px solid #e5e5ea;
+        border-radius: 12px;
+        padding: 16px;
+        cursor: default;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+        border-color: var(--apple-blue);
+        z-index: 10;
+    }
+
+    .card-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Hover 시 나타나는 설명 영역 */
+    .card-desc {
+        max-height: 0;
+        opacity: 0;
+        font-size: 12px;
+        color: #555;
+        line-height: 1.5;
+        transition: all 0.4s ease;
+        margin-top: 0;
+    }
+
+    .card:hover .card-desc {
+        max-height: 100px;
+        opacity: 1;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #f1f1f1;
+    }
+
+    /* 사분면별 포인트 컬러 */
+    .q1 .card:hover { border-color: #34c759; } /* 우선 실행: Green */
+    .q2 .card:hover { border-color: #ff3b30; } /* 핵심 협상: Red */
+    .q3 .card:hover { border-color: #5ac8fa; } /* 보완 수단: Light Blue */
+    .q4 .card:hover { border-color: #ff9500; } /* 교환 당근: Orange */
+
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>인사제도 개편 옵션 시각화 매트릭스</h1>
+    <p>항목에 마우스를 올리면 상세 설명과 기대 효과가 표시됩니다.</p>
+</div>
+
+<div class="matrix-wrapper">
+    <!-- 축 라벨 -->
+    <div class="axis-label axis-y-top">재무적 효과 (높음) ▲</div>
+    <div class="axis-label axis-y-bottom">▼ 재무적 효과 (낮음)</div>
+    <div class="axis-label axis-x-left">◀ 도입 가능성 (낮음)</div>
+    <div class="axis-label axis-x-right">도입 가능성 (높음) ▶</div>
+
+    <div class="grid-container">
+        
+        <!-- 2사분면: 도입 낮음 / 효과 높음 -->
+        <div class="quadrant q2">
+            <div class="quadrant-title">⚔️ 핵심 협상 대상 (Big Bets)</div>
+            
+            <div class="card">
+                <div class="card-title">법정 연차사용촉진제 전면 도입 및 유급휴가 폐지</div>
+                <div class="card-desc">
+                    <strong>효과:</strong> 연차수당 250억 절감 목표 달성을 위한 핵심 카드.<br>
+                    <strong>이슈:</strong> 실질적 임금 삭감으로 강성 노조 반발 1순위. 취업규칙 불이익 변경 동의 필수.
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">초과근무 강제 보상휴가제 전환</div>
+                <div class="card-desc">
+                    <strong>효과:</strong> 초과근무 수당 지급 밸브 원천 차단.<br>
+                    <strong>이슈:</strong> 근로기준법상 노사 서면 합의 필수. 사측 단독 시행 불가.
+                </div>
+            </div>
+        </div>
+
+        <!-- 1사분면: 도입 높음 / 효과 높음 -->
+        <div class="quadrant q1">
+            <div class="quadrant-title">🎯 우선 실행 대상 (Quick Wins)</div>
+            
+            <div class="card">
+                <div class="card-title">PC 셧다운 전결권 '본부장' 상향</div>
+                <div class="card-desc">
+                    <strong>효과:</strong> 결재 허들 상향으로 무의미한 OT 즉각 통제.<br>
+                    <strong>이슈:</strong> 사측 인사권으로 즉시 시행 가능. 본부장 피로도 증가 및 실무 지연 리스크 존재.
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">시간 단위 구체적 산출물 기재 강제</div>
+                <div class="card-desc">
+                    <strong>효과:</strong> 코어타임 외 초과근무 신청 시 구체적 목표 기재 강제로 아이들링 꼼수 심리적 차단.<br>
+                    <strong>이슈:</strong> 시스템 로직 즉시 변경 가능. 무노동 무임금 원칙 적용.
+                </div>
+            </div>
+        </div>
+
+        <!-- 4사분면: 도입 낮음 / 효과 낮음 -->
+        <div class="quadrant q4">
+            <div class="quadrant-title">⚖️ 교환용 당근 (Trade-offs)</div>
+            
+            <div class="card">
+                <div class="card-title">2주 80시간 달성 조건부 '격주 4.5일제'</div>
+                <div class="card-desc">
+                    <strong>목적:</strong> 연차 폐지 및 통제 수용을 이끌어내기 위한 노조 협상용 패키지.<br>
+                    <strong>이슈:</strong> 근로량 달성 조건을 엄격히 걸어 실질적 수당 통제 레버리지로 활용.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">시행 첫해 미사용 연차 50% 현금 보전</div>
+                <div class="card-desc">
+                    <strong>목적:</strong> 연차촉진제 도입 충격 완화 (Grace Period).<br>
+                    <strong>이슈:</strong> 단기적 비용 발생. 장기적 제도 안착을 위한 매몰 비용 성격.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3사분면: 도입 높음 / 효과 낮음 -->
+        <div class="quadrant q3">
+            <div class="quadrant-title">💡 보완/지원 수단 (Low Hanging Fruits)</div>
+            
+            <div class="card">
+                <div class="card-title">리더/특정 직무 대상 '명령 휴가제 (Block Leave)'</div>
+                <div class="card-desc">
+                    <strong>효과:</strong> 고연차 강제 소진 및 부서 내 연차 사용 낙수 효과 유도.<br>
+                    <strong>이슈:</strong> '내부 통제 및 리스크 관리'라는 강력한 명분으로 도입 용이.
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">수당/연차 데이터 공유 및 리더 KPI 반영</div>
+                <div class="card-desc">
+                    <strong>효과:</strong> 리더에게 통제 책임을 부여하고 데이터 기반 면담 강제화.<br>
+                    <strong>이슈:</strong> 사내 정책으로 즉시 시행 가능하나 리더 성향에 따른 편차 존재.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

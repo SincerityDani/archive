@@ -1,566 +1,321 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>기업금융/투자금융 본부장 보상 체계 개편안</title>
-    <style>
-        :root {
-            --ink: #2b2f33;
-            --sub-ink: #6b7176;
-            --accent: #34495e;
-            --accent-soft: #5d7591;
-            --neg: #a7adb3;
-            --line: #d8dcdf;
-            --bg-soft: #f4f5f6;
-        }
-
-        body {
-            font-family: "Noto Sans CJK KR", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            color: var(--ink);
-            line-height: 1.65;
-            margin: 0;
-            padding: 32px 28px;
-            background-color: #ffffff;
-            font-size: 15px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header {
-            border-bottom: 2px solid var(--ink);
-            padding-bottom: 16px;
-            margin-bottom: 28px;
-        }
-
-        h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin: 0 0 6px 0;
-            letter-spacing: -0.3px;
-            color: var(--ink);
-        }
-
-        .document-meta {
-            font-size: 13px;
-            color: var(--sub-ink);
-        }
-
-        section {
-            margin-bottom: 30px;
-        }
-
-        h2 {
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--ink);
-            border-left: 3px solid var(--accent);
-            padding-left: 10px;
-            margin-top: 26px;
-            margin-bottom: 14px;
-        }
-
-        h3 {
-            font-size: 14.5px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-top: 20px;
-            margin-bottom: 8px;
-        }
-
-        p {
-            margin: 0 0 9px 0;
-            font-size: 15px;
-        }
-
-        ul, ol {
-            margin: 0 0 14px 0;
-            padding-left: 20px;
-            font-size: 15px;
-        }
-
-        li {
-            margin-bottom: 5px;
-        }
-
-        .table-scroll {
-            overflow-x: auto;
-            margin: 12px 0 22px 0;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        table {
-            width: 100%;
-            min-width: 560px;
-            border-collapse: collapse;
-            font-size: 13.5px;
-        }
-
-        th, td {
-            border: 1px solid var(--line);
-            padding: 9px 11px;
-            text-align: left;
-            vertical-align: top;
-        }
-
-        th {
-            background-color: var(--bg-soft);
-            color: var(--ink);
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        td {
-            background-color: #ffffff;
-            color: var(--ink);
-        }
-
-        code {
-            background-color: var(--bg-soft);
-            padding: 1px 5px;
-            border-radius: 3px;
-            font-size: 13px;
-        }
-
-        .callout {
-            background-color: var(--bg-soft);
-            border-left: 3px solid var(--accent);
-            padding: 11px 14px;
-            margin: 12px 0;
-            font-size: 15px;
-        }
-
-        .highlight-text {
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid var(--line);
-            margin: 22px 0;
-        }
-
-        .appendix-break {
-            page-break-before: always;
-        }
-
-        .chart-box {
-            border: 1px solid var(--line);
-            border-radius: 6px;
-            padding: 16px 14px;
-            margin: 14px 0;
-            background: #fff;
-        }
-
-        .chart-caption {
-            font-size: 12px;
-            color: var(--sub-ink);
-            text-align: center;
-            margin-top: 8px;
-        }
-
-        svg text {
-            font-family: "Noto Sans CJK KR", "Noto Sans KR", sans-serif;
-        }
-
-        /* ---- 1. MBO/RAOP stacked blocks ---- */
-        .track-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .track-block {
-            border-radius: 6px;
-            padding: 12px 14px;
-        }
-        .track-block.raop {
-            background: var(--accent-soft);
-            border: 1px dashed var(--accent);
-        }
-        .track-block.mbo {
-            background: var(--accent);
-        }
-        .track-title {
-            color: #fff;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .track-sub {
-            color: #eef2f5;
-            font-size: 12.5px;
-            margin-bottom: 6px;
-        }
-        .track-row {
-            display: flex;
-            gap: 6px;
-            font-size: 12px;
-            color: #eef2f5;
-        }
-        .track-row .k {
-            flex: 0 0 62px;
-            color: #cdd9e2;
-        }
-        .track-connector {
-            text-align: center;
-            font-size: 11px;
-            color: var(--sub-ink);
-            margin: 2px 0;
-        }
-
-        /* ---- 2. RAOP vertical waterfall cards ---- */
-        .raop-flow {
-            display: flex;
-            flex-direction: column;
-        }
-        .raop-card {
-            display: flex;
-            gap: 10px;
-            padding: 10px 0;
-        }
-        .raop-bar-col {
-            flex: 0 0 10px;
-            display: flex;
-            justify-content: center;
-        }
-        .raop-bar {
-            width: 10px;
-            border-radius: 3px;
-        }
-        .raop-body {
-            flex: 1;
-            min-width: 0;
-        }
-        .raop-head {
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-            margin-bottom: 3px;
-        }
-        .raop-step {
-            font-size: 11px;
-            color: var(--sub-ink);
-            font-weight: 700;
-        }
-        .raop-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--ink);
-        }
-        .raop-formula {
-            font-size: 12.5px;
-            margin-bottom: 3px;
-        }
-        .raop-purpose {
-            font-size: 12.5px;
-            color: var(--sub-ink);
-        }
-        .raop-connector {
-            text-align: left;
-            padding-left: 4px;
-            font-size: 13px;
-            color: var(--line);
-        }
-        .raop-card.result .raop-name,
-        .raop-card.result .raop-step {
-            color: var(--accent);
-        }
-
-        /* ---- 4. Timeline ---- */
-        .timeline-legend {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .timeline-item {
-            display: flex;
-            gap: 10px;
-        }
-        .timeline-dot {
-            flex: 0 0 12px;
-            height: 12px;
-            border-radius: 3px;
-            margin-top: 3px;
-        }
-        .timeline-text-title {
-            font-size: 13.5px;
-            font-weight: 700;
-            color: var(--ink);
-        }
-        .timeline-text-body {
-            font-size: 13px;
-            color: var(--sub-ink);
-        }
-
-        .footnote {
-            font-size: 12px;
-            color: var(--sub-ink);
-            margin-top: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>인사제도 개편 및 비용 통제 실행안</title>
+<style>
+    /* 애플 기본 폰트(San Francisco 및 Apple SD Gothic Neo)를 최우선으로 적용했습니다. */
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Helvetica Neue", Arial, sans-serif;
+        color: #111;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.5;
+        letter-spacing: -0.01em; /* 애플 디자인 특유의 자간 조정 */
+    }
+    .report-container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 40px;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        border-bottom: 3px solid #111;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    h2 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-top: 35px;
+        margin-bottom: 10px;
+        color: #111;
+        display: flex;
+        align-items: center;
+    }
+    h2::before {
+        content: "■";
+        margin-right: 8px;
+        font-size: 12px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+        font-size: 13px;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px 12px;
+        vertical-align: middle;
+    }
+    th {
+        background-color: #111;
+        color: #fff;
+        font-weight: 600;
+        text-align: center;
+        white-space: nowrap;
+    }
+    td {
+        background-color: #fff;
+    }
+    td.center {
+        text-align: center;
+        font-weight: 600;
+        background-color: #f7f7f7;
+    }
+    ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+    li {
+        margin-bottom: 4px;
+    }
+    .highlight {
+        color: #d90000;
+        font-weight: 700;
+    }
+    .note {
+        font-size: 12px;
+        color: #666;
+        background-color: #f1f1f1;
+        padding: 10px;
+        border-left: 3px solid #111;
+        margin-top: -5px;
+    }
+</style>
 </head>
 <body>
 
-<div class="container">
+<div class="report-container">
+    <h1>인사제도 개편 및 비용 통제 실행안</h1>
 
-    <header>
-        <h1>기업금융/투자금융 본부장 보상 체계 개편안</h1>
-        <div class="document-meta">리스크 책임 경영 및 자본 효율성 제고를 위한 성과 보상 구조 재편</div>
-    </header>
+    <h2>1. 재무적 타당성 (비용 절감 시뮬레이션)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="15%">구분</th>
+                <th width="20%">현재 지출 (25~26년)</th>
+                <th width="20%">목표 절감액 (26년)</th>
+                <th width="45%">실행 방안 및 비고</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="center">연차수당</td>
+                <td style="text-align: right;">550억 원</td>
+                <td style="text-align: right; color: blue; font-weight: bold;">▼ 250억 원</td>
+                <td>
+                    <ul>
+                        <li>유급휴가 8일 폐지 및 연차사용촉진제 시행</li>
+                        <li>연차 사용률 강제 상향 (현 45% → 80%)</li>
+                        <li><span class="highlight">[직급별 평균 통상임금 데이터 기입 필요]</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="center">초과근무수당</td>
+                <td style="text-align: right;">400억 원</td>
+                <td style="text-align: right; color: blue; font-weight: bold;">▼ 180억 원</td>
+                <td>
+                    <ul>
+                        <li>셧다운 전결권 상향 및 결재 요건 강화</li>
+                        <li>고정 OT 초과분 45% 삭감 목표</li>
+                        <li><span class="highlight">[본부별 고정 OT 초과 인원 데이터 기입 필요]</span></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="center" style="background-color: #e2e2e2;">총 계</td>
+                <td style="text-align: right; font-weight: bold; background-color: #e2e2e2;">950억 원</td>
+                <td style="text-align: right; color: blue; font-weight: bold; background-color: #e2e2e2;">▼ 430억 원</td>
+                <td style="background-color: #e2e2e2; font-weight: bold;">연간 총 430억 원 절감 목표</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <!-- 1. Recap -->
-    <section>
-        <h2>1. 개편 배경 및 보상 구조 방향성 (Recap)</h2>
-        <p><strong>■ 개편 목적</strong></p>
-        <p>외형(취급액) 성장 중심의 평가 체계를 탈피하고, 기업금융/투자금융 본부장의 <span class="highlight-text">'자본 효율성 극대화'</span> 및 <span class="highlight-text">'리스크 책임 경영'</span>을 확립함.</p>
+    <h2>2. 대기업 단축 근무 벤치마킹</h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="20%">기업명</th>
+                <th width="35%">시행 조건</th>
+                <th width="45%">제도 내용</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="center">삼성전자</td>
+                <td>월 필수 근로시간 충족 시</td>
+                <td>매월 1회 '페이데이 프라이데이(쉬는 날)' 운영</td>
+            </tr>
+            <tr>
+                <td class="center">SK하이닉스</td>
+                <td>2주 단위 80시간 이상 근무 시</td>
+                <td>매월 1회 '해피 프라이데이' 휴무 부여</td>
+            </tr>
+            <tr>
+                <td class="center">포스코</td>
+                <td>2주 단위 80시간 근무 시</td>
+                <td>격주 주 4일제 (격주 금요일 휴무) 시행 중</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="note">
+        <strong>적용 시사점:</strong> 단순 복지가 아닌 '2주 80시간 근로시간 충족'을 엄격한 조건으로 설정하여 근로량 통제 수단으로 활용
+    </div>
 
-        <p style="margin-top: 14px;"><strong>■ 보상 구조 전면 재편 (Two-Track)</strong></p>
-        <p>과정과 결과를 분리하여, 주주가치를 창출한 진성이익에 대해서만 초과 성과급을 지급함.</p>
+    <h2>3. 대 노조 핵심 협상안 (Big Deal)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="20%">구분</th>
+                <th width="40%">사측 요구안 (쟁취)</th>
+                <th width="40%">노조 협상안 (제공)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="center">연차 제도</td>
+                <td>
+                    <ul>
+                        <li>유급휴가 8개 전면 폐지</li>
+                        <li>법정 '연차사용촉진제도' 즉각 도입</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li><strong>격주 주 4.5일제 도입</strong><br>(유급휴가 폐지 보상)</li>
+                        <li><strong>시행 첫해 연차 수당 50% 보전</strong><br>(임금 삭감 반발 완화용 Grace Period)</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="center">초과 근무</td>
+                <td>
+                    <ul>
+                        <li>PC 셧다운 해제 본부장 승인 상향</li>
+                        <li>코어타임 외 근무 통제 강화</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>선택적 근로제 유지 (고정근무제 회귀 철회)</li>
+                        <li>15분 단위 PC 팝업 감시안 폐기</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-        <div class="chart-box">
-            <div class="track-stack">
-                <div class="track-block raop">
-                    <div class="track-title">추가 성과급 (RAOP) · 변동</div>
-                    <div class="track-sub">재무적 초과 순이익(주주가치)에 대한 이익 공유</div>
-                    <div class="track-row"><span class="k">평가지표</span><span>자본 비용 통제, 리스크 방어, 진성이익</span></div>
-                </div>
-                <div class="track-connector">▲ 재원(RAOP) × KPI 배수(0~1.3배)로 매년 변동</div>
-                <div class="track-block mbo">
-                    <div class="track-title">기본 성과급 (MBO) · 고정</div>
-                    <div class="track-sub">영업 과정 및 전략 활동에 대한 기본 보상</div>
-                    <div class="track-row"><span class="k">평가지표</span><span>파이프라인 구축(Co-inve 등), 조직 리더십</span></div>
-                </div>
-            </div>
-            <div class="chart-caption">기본급은 고정, 추가 성과급은 재원과 KPI 배수에 따라 매년 달라지는 변동 보상임</div>
-        </div>
-    </section>
+    <h2>4. 즉시 실행 규정 지침</h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="20%">영역</th>
+                <th width="80%">세부 실행 지침 (TO-BE)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="center">아이들링 차단</td>
+                <td>
+                    <ul>
+                        <li>코어타임(09~15시) 외 근무 시 초과근무 발생 예상 시 적용</li>
+                        <li>근태 시스템 내 <strong>'시간 단위 구체적 산출물'</strong> 사전 기재 강제</li>
+                        <li>산출물 미기재 시 수당 산정 원천 제외</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="center">PC 셧다운 통제</td>
+                <td>
+                    <ul>
+                        <li>전결권 상향: 실장(그룹장) 전결 → <strong>본부장 전결</strong></li>
+                        <li>초과근무 당일 15시(코어타임 종료) 이전 사전 결재 완료 건만 셧다운 해제</li>
+                        <li>사후 결재 절대 불가</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="center">근무제 및 4.5일제</td>
+                <td>
+                    <ul>
+                        <li>기존 선택적 근로제 유지 (불이익 변경 리스크 회피)</li>
+                        <li>2주 단위 80시간 근무 미달 시 해당 월 4.5일제 대상 제외 (페널티 신설)</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-    <hr>
+    <h2>5. 부서장 행동 가이드</h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="20%">영역</th>
+                <th width="15%">주기</th>
+                <th width="65%">실행 가이드 및 제재 방안</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="center">연차 소진 독려</td>
+                <td style="text-align: center;">매월 5일</td>
+                <td>
+                    <ul>
+                        <li>실/팀장은 부서원 월간 연차 계획표 수합 및 본부장 서면 보고</li>
+                        <li>부서장 본인 연차 소진율이 본부 평균 미달 시 KPI 감점 처리</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="center">초과근무 통제</td>
+                <td style="text-align: center;">매월 1일</td>
+                <td>
+                    <ul>
+                        <li>인사팀 → 본부장/실장: 조직별 초과근무 수당 총액 및 상위 10% 명단 발송</li>
+                        <li>리더는 상위 10% 인원과 '업무량 조정 1:1 면담' 의무 실시</li>
+                        <li>면담 결과 인사팀 회신 의무화 (체크리스트 별도 배포)</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-    <!-- 2. RAOP -->
-    <section>
-        <h2>2. 추가 성과급 재원(Base) 산출: RAOP</h2>
-        <p><strong>■ 목적</strong></p>
-        <p>회사의 자본 비용과 부도 위험을 모두 차감하고 남은 실질적인 주주 몫의 이익을 도출함.</p>
-
-        <div class="chart-box">
-            <div class="raop-flow">
-
-                <div class="raop-card">
-                    <div class="raop-bar-col"><div class="raop-bar" style="height: 64px; background: var(--accent);"></div></div>
-                    <div class="raop-body">
-                        <div class="raop-head"><span class="raop-step">STEP 1</span><span class="raop-name">총 영업수익</span></div>
-                        <div class="raop-formula"><code>당해 연도 수취 이자 + (총 취급 수수료 ÷ 딜 만기년수)</code></div>
-                        <div class="raop-purpose">이자·배당수익 + 취급·자문 수수료. 수수료를 만기에 걸쳐 안분 인식해, 첫해 일시 인식으로 보상 풀이 왜곡되는 현상을 차단함.</div>
-                    </div>
-                </div>
-                <div class="raop-connector">▼ (−)</div>
-
-                <div class="raop-card">
-                    <div class="raop-bar-col"><div class="raop-bar" style="height: 26px; background: var(--neg);"></div></div>
-                    <div class="raop-body">
-                        <div class="raop-head"><span class="raop-step">STEP 2</span><span class="raop-name">조달비용 (FTP)</span></div>
-                        <div class="raop-formula"><code>본부별 대여 자금 잔액 × 기간별 매칭 사내 금리</code></div>
-                        <div class="raop-purpose">시장 금리 변동 등 외부 요인을 배제하고, 자금부 표준 FTP를 적용해 순수 영업 마진만 객관적으로 평가함.</div>
-                    </div>
-                </div>
-                <div class="raop-connector">▼ (−)</div>
-
-                <div class="raop-card">
-                    <div class="raop-bar-col"><div class="raop-bar" style="height: 22px; background: var(--neg);"></div></div>
-                    <div class="raop-body">
-                        <div class="raop-head"><span class="raop-step">STEP 3</span><span class="raop-name">직접영업비용</span></div>
-                        <div class="raop-formula"><code>외부 자문료 + 회계 실사(DD) 비용 + 감정평가 수수료 등</code></div>
-                        <div class="raop-purpose">본사 공통 간접비(임대료, IT 유지비 등)는 배제하고, 해당 딜 성사를 위해 직접 지출된 실비(1:1 매칭)만 차감함.</div>
-                    </div>
-                </div>
-                <div class="raop-connector">▼ (−)</div>
-
-                <div class="raop-card">
-                    <div class="raop-bar-col"><div class="raop-bar" style="height: 38px; background: var(--neg);"></div></div>
-                    <div class="raop-body">
-                        <div class="raop-head"><span class="raop-step">STEP 4</span><span class="raop-name">위험비용 (Expected Loss)</span></div>
-                        <div class="raop-formula"><code>익스포저(EAD) × 부도율(PD) × 부도시 손실률(LGD)</code></div>
-                        <div class="raop-purpose">차주 신용도·담보력을 반영한 통계적 예상 손실을 사전 차감해, 고위험 자산 취급 시 본부 이익이 즉각 줄어들도록 설계함.</div>
-                    </div>
-                </div>
-                <div class="raop-connector">▼ =</div>
-
-                <div class="raop-card result">
-                    <div class="raop-bar-col"><div class="raop-bar" style="height: 46px; background: var(--accent);"></div></div>
-                    <div class="raop-body">
-                        <div class="raop-head"><span class="raop-step">RESULT</span><span class="raop-name">최종 RAOP</span></div>
-                        <div class="raop-formula"><code>Step 1 − (Step 2 + Step 3 + Step 4)</code></div>
-                        <div class="raop-purpose">전사 최저 요구 자본비용(과락, Hurdle)에 미달할 경우, 추가 성과급 재원(Pool)은 전액 0원 처리됨.</div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="chart-caption">영업수익에서 조달·영업·위험비용을 순서대로 차감해 최종 RAOP를 도출 (막대 높이는 상대적 규모를 나타내는 예시이며 실제 비율이 아님)</div>
-        </div>
-    </section>
-
-    <hr>
-
-    <!-- 3. KPI -->
-    <section>
-        <h2>3. 목표 달성률 KPI 설정 (Multiplier)</h2>
-        <p><strong>■ 목적</strong></p>
-        <p>확정된 성과급 재원에 0.0배 ~ 1.3배의 가중치를 차등 적용하여, 무분별한 위험 자산 쏠림을 통제함.</p>
-
-        <div class="table-scroll">
-        <table>
-            <thead>
-                <tr>
-                    <th>평가 지표</th>
-                    <th>가중치</th>
-                    <th>산출 공식 및 의미</th>
-                    <th>설계 취지 및 통제 포인트</th>
-                    <th>삭감 및 과락 기준</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>포트폴리오 RoRWA</strong></td>
-                    <td>60%</td>
-                    <td><code>본부 영업수익 / 본부 일평균 RWA</code></td>
-                    <td>자본(위험가중자산) 대비 수익성을 측정하여, 자본 가성비가 높은 우량 딜 중심의 영업을 유도함(일평균 잔액 적용).</td>
-                    <td>전사 최저 자본비용 미달 시 0배 적용</td>
-                </tr>
-                <tr>
-                    <td><strong>본부 NPL 방어율</strong></td>
-                    <td>40%</td>
-                    <td><code>신규 고정이하여신(NPL) 발생액 / 누적 여신 잔액</code></td>
-                    <td>본부 관리 포트폴리오의 실질 부실률을 제어하여 임기 이후 발생할 리스크까지 사후 책임지도록 안전장치를 부여함.</td>
-                    <td>NPL 통제선(예: 3%) 초과 시 0배 적용(성과급 전액 삭감)</td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-    </section>
-
-    <hr>
-
-    <!-- 4. Time Horizon -->
-    <section>
-        <h2>4. 목표 부여 및 평가 기간 (Time Horizon)</h2>
-        <p><strong>■ 목적</strong></p>
-        <p>기업금융/투자금융의 수익 인식(1년 차)과 부실 발생(2~4년 차) 간의 시차를 극복함.</p>
-        <p>영업 몰입도와 장기 리스크 책임을 동시에 강제하는 결합 모델(1년 평가 + 4년 이연지급·Clawback)을 적용함.</p>
-
-        <div class="chart-box">
-            <svg viewBox="0 0 640 155" width="100%" height="auto" role="img" aria-label="목표 평가, 분할 지급, 환수 구간 타임라인">
-                <line x1="70" y1="40" x2="610" y2="40" stroke="#c3c8cc" stroke-width="1"/>
-                <g font-size="11" fill="#6b7176" text-anchor="middle">
-                    <line x1="70" y1="36" x2="70" y2="44" stroke="#c3c8cc"/><text x="70" y="28">Year 0</text>
-                    <line x1="178" y1="36" x2="178" y2="44" stroke="#c3c8cc"/><text x="178" y="28">Year 1</text>
-                    <line x1="286" y1="36" x2="286" y2="44" stroke="#c3c8cc"/><text x="286" y="28">Year 2</text>
-                    <line x1="394" y1="36" x2="394" y2="44" stroke="#c3c8cc"/><text x="394" y="28">Year 3</text>
-                    <line x1="502" y1="36" x2="502" y2="44" stroke="#c3c8cc"/><text x="502" y="28">Year 4</text>
-                    <line x1="610" y1="36" x2="610" y2="44" stroke="#c3c8cc"/><text x="610" y="28">Year 5</text>
-                </g>
-
-                <rect x="70" y="60" width="108" height="26" fill="#34495e" rx="2"/>
-                <text x="124" y="78" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700">① 평가 (1년)</text>
-
-                <rect x="178" y="98" width="108" height="26" fill="#5d7591"/>
-                <rect x="286" y="98" width="108" height="26" fill="#5d7591"/>
-                <rect x="394" y="98" width="108" height="26" fill="#5d7591"/>
-                <rect x="502" y="98" width="108" height="26" fill="#5d7591"/>
-                <line x1="178" y1="98" x2="178" y2="124" stroke="#ffffff" stroke-width="1.5"/>
-                <line x1="286" y1="98" x2="286" y2="124" stroke="#ffffff" stroke-width="1.5"/>
-                <line x1="394" y1="98" x2="394" y2="124" stroke="#ffffff" stroke-width="1.5"/>
-                <line x1="502" y1="98" x2="502" y2="124" stroke="#ffffff" stroke-width="1.5"/>
-                <text x="394" y="115" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700">② 4년 분할 지급 (연 25%)</text>
-
-                <rect x="178" y="145" width="1" height="0"/>
-                <rect x="178" y="132" width="432" height="16" fill="none" stroke="#c0392b" stroke-width="1.3" stroke-dasharray="5,3" opacity="0.7"/>
-                <text x="394" y="143" text-anchor="middle" fill="#c0392b" font-size="10.5" opacity="0.9">③ 환수(Clawback) 가능 구간 · 4년 Vintage</text>
-            </svg>
-
-            <div class="timeline-legend">
-                <div class="timeline-item">
-                    <div class="timeline-dot" style="background: var(--accent);"></div>
-                    <div>
-                        <div class="timeline-text-title">① 목표 및 평가 (1년 단위)</div>
-                        <div class="timeline-text-body">매년 당해 연도 RAOP 목표 부여. 연말 실적만으로 성과급 풀(Pool)을 직관적으로 확정함.</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot" style="background: var(--accent-soft);"></div>
-                    <div>
-                        <div class="timeline-text-title">② 지급 (4년 분할 이연)</div>
-                        <div class="timeline-text-body">확정된 성과급의 즉시 지급을 지양하고, 4년에 걸쳐 분할 지급함.</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot" style="background: #c0392b; opacity: 0.75;"></div>
-                    <div>
-                        <div class="timeline-text-title">③ 환수 (Clawback)</div>
-                        <div class="timeline-text-body">성과급이 지급된 딜에 4년 꼬리표(Vintage)를 부여. 해당 기간 내 대규모 부실 발생 시 잔여 성과급 전액 환수함.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <hr>
-
-    <!-- 별첨 -->
-    <section class="appendix-break">
-        <h2>[별첨] 보상 시뮬레이션 및 시사점</h2>
-        <p><strong>■ 상황 가정 (동일하게 100억의 영업수익을 달성한 두 본부장 비교)</strong></p>
-        <div class="table-scroll">
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 30%;">구분</th>
-                    <th style="width: 35%;">A 본부장 (고위험 영업형)</th>
-                    <th style="width: 35%;">B 본부장 (자본 효율형)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>영업 스타일</strong></td>
-                    <td>자본 소모 과다, 고위험 자산 집중</td>
-                    <td>자본 사용 최소화, 우량 자산 편성</td>
-                </tr>
-                <tr>
-                    <td><strong>1년 차 RAOP 산출</strong></td>
-                    <td>40억 (위험비용 대거 차감)</td>
-                    <td>70억 (진성이익 극대화)</td>
-                </tr>
-                <tr>
-                    <td><strong>KPI 배수 (RoRWA)</strong></td>
-                    <td>0.7배 (자본 가성비 미달)</td>
-                    <td>1.3배 (자본 가성비 초과)</td>
-                </tr>
-                <tr>
-                    <td><strong>1년 차 확정 보상 풀</strong></td>
-                    <td><strong>28억</strong></td>
-                    <td><strong>91억</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>3년 차 결과 (부실 4% 발생 시)</strong></td>
-                    <td><strong>잔여 성과급 전액 환수 (지급 취소)</strong></td>
-                    <td>NPL 0% 유지로 정상 지급</td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-
-        <p><strong>■ 시사점 (Insight)</strong></p>
-        <ul>
-            <li>동일한 100억의 외형 실적을 기록하더라도, 자본 효율성을 제고한 본부장이 3배 이상의 성과급 풀을 확보함.</li>
-            <li>단기 성과에 따른 보상이 발생하더라도, 4년 내 부실 발생 시 전액 환수되어 책임 경영 기조가 엄격히 작동함.</li>
-        </ul>
-    </section>
-
+    <h2>6. [별첨] 의사결정권자 확인 요청 사항</h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="15%">요청 부서</th>
+                <th width="25%">확인 필요 데이터</th>
+                <th width="60%">검토 목적</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="center">인사/재무</td>
+                <td>직급별 평균 통상임금 및<br>고정 OT 초과자 비율</td>
+                <td>2026년 제도 개편 후 재무적 절감액의 정확한 시뮬레이션 산출</td>
+            </tr>
+            <tr>
+                <td class="center">IT</td>
+                <td>산출물 사전 기재 기능</td>
+                <td>기존 인트라넷 근태 시스템 즉시 적용 가능 여부 및 개발 공수(비용/기간) 산정</td>
+            </tr>
+            <tr>
+                <td class="center">인사/재무</td>
+                <td>연차 보상 산정 기준</td>
+                <td>Grace Period 적용 시 잔여 연차 50% 보전 금액 기준 확정 (기본급 vs 통상임금)</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 </body>

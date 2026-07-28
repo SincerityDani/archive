@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>회식 자리 뽑기 · 바다</title>
+<title>회식 자리 뽑기</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gothic+A1:wght@400;500;700;900&display=swap" rel="stylesheet">
 
@@ -13,26 +13,26 @@
 
 <style>
   :root{
-    --bg-deep:#04212F;
-    --bg:#073247;
-    --surface:#0E4258;
-    --surface2:#155A73;
-    --foam:#F3EFDF;
-    --foam-dim:#C9CBB8;
-    --ink:#0B1E28;
-    --coral:#FF6B4A;
-    --coral-dark:#C8431F;
-    --teal:#3FC1B5;
-    --line: rgba(243,239,223,0.14);
+    --bg:#EFF5FC;
+    --bg-deep:#E1EDFA;
+    --surface:#FFFFFF;
+    --surface2:#EAF3FC;
+    --ink:#123061;
+    --ink-dim:#5B7290;
+    --blue:#1565C0;
+    --blue-dark:#0D47A1;
+    --red:#D62828;
+    --red-dark:#A81E1E;
+    --line: rgba(18,48,97,0.14);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     background:
-      radial-gradient(circle at 12% 6%, rgba(63,193,181,0.12), transparent 42%),
-      radial-gradient(circle at 92% 88%, rgba(255,107,74,0.10), transparent 45%),
+      radial-gradient(circle at 10% 4%, rgba(214,40,40,0.06), transparent 40%),
+      radial-gradient(circle at 92% 90%, rgba(21,101,192,0.10), transparent 45%),
       linear-gradient(180deg, var(--bg-deep), var(--bg) 60%);
-    color:var(--foam);
+    color:var(--ink);
     font-family:'Gothic A1', sans-serif;
     min-height:100vh;
     padding:32px 16px 80px;
@@ -42,18 +42,17 @@
 
   header{text-align:center;margin-bottom:34px;}
   .eyebrow{
-    font-size:13px; letter-spacing:0.35em; color:var(--teal);
+    font-size:13px; letter-spacing:0.35em; color:var(--red);
     text-transform:uppercase; margin-bottom:10px; font-weight:700;
   }
   h1{
     font-family:'Jua', sans-serif;
     font-size:clamp(30px,6vw,50px);
     margin:0 0 10px;
-    color:var(--foam);
-    text-shadow:0 4px 0 rgba(0,0,0,0.25);
+    color:var(--blue-dark);
   }
-  .sub{color:var(--foam-dim); font-size:15px; line-height:1.6; margin:0 auto; max-width:540px;}
-  .sub b{color:var(--foam);}
+  .sub{color:var(--ink-dim); font-size:15px; line-height:1.6; margin:0 auto; max-width:540px;}
+  .sub b{color:var(--ink);}
 
   .draw-panel{
     background:var(--surface);
@@ -62,13 +61,13 @@
     padding:32px 24px 28px;
     margin-bottom:40px;
     position:relative;
-    box-shadow:0 20px 50px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03);
+    box-shadow:0 16px 40px rgba(21,101,192,0.12);
   }
   .name-row{display:flex; gap:10px; justify-content:center; margin-bottom:26px; flex-wrap:wrap;}
   #nameInput{
     background:var(--bg-deep);
     border:1px solid var(--line);
-    color:var(--foam);
+    color:var(--ink);
     padding:14px 18px;
     border-radius:14px;
     font-family:'Gothic A1', sans-serif;
@@ -77,40 +76,39 @@
     outline:none;
     transition:border-color .2s;
   }
-  #nameInput:focus{border-color:var(--teal);}
-  #nameInput::placeholder{color:#6f8a92;}
+  #nameInput:focus{border-color:var(--blue);}
+  #nameInput::placeholder{color:#8DA3C2;}
   #nameInput:disabled{opacity:0.4;}
 
   .stage{display:flex; flex-direction:column; align-items:center; gap:18px;}
 
-  /* 조개(진주조개) 뽑기 버튼 - 부챗살 모양 클립패스는 JS로 생성 */
+  /* 구명튜브(라이프 링) 모양 뽑기 버튼 */
   .cap-btn{
     --size:150px;
     width:var(--size); height:var(--size);
-    border:none;
-    cursor:pointer;
+    border:none; padding:0; background:transparent; cursor:pointer;
     position:relative;
-    background:
-      radial-gradient(circle at 35% 28%, #ff9478, var(--coral) 45%, var(--coral-dark) 82%);
-    color:#fff7f2;
-    font-family:'Jua', sans-serif;
-    font-size:19px;
-    letter-spacing:2px;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:
-      0 10px 0 rgba(0,0,0,0.28),
-      0 18px 30px rgba(255,107,74,0.35),
-      inset 0 -6px 10px rgba(0,0,0,0.25),
-      inset 0 6px 10px rgba(255,255,255,0.25);
+    box-shadow:0 12px 26px rgba(21,101,192,0.28);
+    border-radius:50%;
     transition:transform .12s ease;
   }
-  .cap-btn::before{
-    content:'🦞';
-    position:absolute; top:14%; left:50%; transform:translateX(-50%);
-    font-size:22px;
+  .cap-btn .ring{
+    position:absolute; inset:0; border-radius:50%;
+    background: repeating-conic-gradient(var(--red) 0deg 22.5deg, #fff 22.5deg 45deg);
+    border:5px solid var(--blue);
+  }
+  .cap-btn .cap-inner{
+    position:absolute; inset:21%; border-radius:50%;
+    background:#fff;
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+    box-shadow: inset 0 0 0 3px var(--blue);
+  }
+  .cap-btn .cap-inner .emoji{font-size:18px; line-height:1; margin-bottom:2px;}
+  .cap-btn .cap-inner .label{
+    font-family:'Jua', sans-serif; font-size:16px; letter-spacing:2px; color:var(--blue-dark);
   }
   .cap-btn:active{transform:scale(0.94);}
-  .cap-btn:disabled{filter:grayscale(0.6); opacity:0.55; cursor:not-allowed;}
+  .cap-btn:disabled{filter:grayscale(0.5); opacity:0.55; cursor:not-allowed;}
   .cap-btn.spin{ animation: capSpin .9s cubic-bezier(.2,.9,.3,1); }
   @keyframes capSpin{
     0%{transform:rotate(0deg) scale(1);}
@@ -119,7 +117,7 @@
   }
 
   .reel-wrap{height:64px; display:flex; align-items:center; justify-content:center;}
-  .reel{font-family:'Jua', sans-serif; font-size:44px; color:var(--teal); min-width:70px; text-align:center;}
+  .reel{font-family:'Jua', sans-serif; font-size:44px; color:var(--red); min-width:70px; text-align:center;}
   .reel.pop{animation: reelPop .5s ease;}
   @keyframes reelPop{
     0%{transform:scale(0.4) rotate(-8deg); opacity:0;}
@@ -127,9 +125,9 @@
     100%{transform:scale(1) rotate(0);}
   }
 
-  .result-text{min-height:24px; font-size:16px; color:var(--foam); text-align:center; font-weight:700;}
-  .hint{color:var(--foam-dim); font-size:13px;}
-  .status{color:var(--coral); font-size:13px; min-height:16px;}
+  .result-text{min-height:24px; font-size:16px; color:var(--ink); text-align:center; font-weight:700;}
+  .hint{color:var(--ink-dim); font-size:13px;}
+  .status{color:var(--red); font-size:13px; min-height:16px;}
 
   .pool{
     display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:22px;
@@ -140,7 +138,7 @@
     width:34px; height:34px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
     font-family:'Jua', sans-serif; font-size:14px;
-    background:var(--surface2); color:var(--foam-dim);
+    background:var(--surface2); color:var(--blue-dark);
     border:1px solid var(--line);
     transition:all .35s ease;
   }
@@ -161,35 +159,36 @@
     border-radius:20px;
     padding:20px 14px 26px;
     text-align:center;
+    box-shadow:0 10px 24px rgba(21,101,192,0.08);
   }
-  .table-name{font-family:'Jua', sans-serif; font-size:17px; color:var(--foam); margin-bottom:14px; letter-spacing:1px;}
-  .table-name span{color:var(--teal); font-size:13px; font-weight:400; font-family:'Gothic A1',sans-serif; margin-left:6px;}
+  .table-name{font-family:'Jua', sans-serif; font-size:17px; color:var(--blue-dark); margin-bottom:14px; letter-spacing:1px;}
+  .table-name span{color:var(--red); font-size:13px; font-weight:400; font-family:'Gothic A1',sans-serif; margin-left:6px;}
   .table-circle{position:relative; width:210px; height:210px; margin:0 auto;}
   .grill{
     position:absolute; inset:26%;
     border-radius:50%;
-    background:
-      repeating-radial-gradient(circle at 50% 50%, rgba(63,193,181,0.20) 0px, rgba(63,193,181,0.20) 2px, transparent 2px, transparent 10px),
-      radial-gradient(circle at 40% 35%, #1c5568, #0a2836 70%);
-    box-shadow:inset 0 4px 10px rgba(0,0,0,0.5), 0 2px 0 rgba(0,0,0,0.2);
+    background: repeating-conic-gradient(from 0deg, var(--blue) 0deg 8deg, #fff 8deg 16deg);
+    border:3px solid var(--red);
+    box-shadow:0 2px 10px rgba(21,101,192,0.15);
   }
   .seat{
     position:absolute;
     width:52px; height:52px;
     border-radius:50%;
-    background:var(--bg-deep);
-    border:2px solid var(--line);
+    background:#fff;
+    border:2px solid var(--blue);
     display:flex; align-items:center; justify-content:center;
     flex-direction:column;
     font-size:11px;
-    color:var(--foam-dim);
+    color:var(--ink-dim);
     transform:translate(-50%,-50%);
     transition:all .3s ease;
   }
-  .seat .num{font-family:'Jua', sans-serif; font-size:13px; color:var(--teal); line-height:1;}
-  .seat .who{font-size:11px; color:var(--foam); font-weight:700; line-height:1.1; margin-top:1px; max-width:46px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .seat.filled{background:var(--coral); border-color:var(--coral-dark);}
-  .seat.filled .num{color:#fff2ea;}
+  .seat .num{font-family:'Jua', sans-serif; font-size:13px; color:var(--blue-dark); line-height:1;}
+  .seat .who{font-size:11px; color:var(--ink); font-weight:700; line-height:1.1; margin-top:1px; max-width:46px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .seat.filled{background:var(--red); border-color:var(--red-dark);}
+  .seat.filled .num{color:#fff;}
+  .seat.filled .who{color:#fff;}
   .seat.pop{animation: seatPop .5s ease;}
   @keyframes seatPop{
     0%{transform:translate(-50%,-50%) scale(0.3);}
@@ -197,28 +196,28 @@
     100%{transform:translate(-50%,-50%) scale(1);}
   }
 
-  .log-card{background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:22px 20px;}
-  .log-title{font-family:'Jua',sans-serif; font-size:16px; margin-bottom:12px; color:var(--foam);}
+  .log-card{background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:22px 20px; box-shadow:0 10px 24px rgba(21,101,192,0.08);}
+  .log-title{font-family:'Jua',sans-serif; font-size:16px; margin-bottom:12px; color:var(--blue-dark);}
   .log-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
   .log-list li{
     display:flex; justify-content:space-between; align-items:center;
     background:var(--bg-deep); border:1px dashed var(--line);
     border-radius:10px; padding:9px 14px; font-size:14px;
   }
-  .log-list li b{color:var(--teal); font-family:'Jua',sans-serif;}
-  .log-empty{color:var(--foam-dim); font-size:14px; text-align:center; padding:8px 0;}
+  .log-list li b{color:var(--red); font-family:'Jua',sans-serif;}
+  .log-empty{color:var(--ink-dim); font-size:14px; text-align:center; padding:8px 0;}
 
   .done-banner{display:none; text-align:center; margin-top:18px;}
   .done-banner.show{display:block; animation:reelPop .5s ease;}
-  .done-banner .msg{font-family:'Jua',sans-serif; font-size:20px; color:var(--teal); margin-bottom:12px;}
+  .done-banner .msg{font-family:'Jua',sans-serif; font-size:20px; color:var(--red); margin-bottom:12px;}
   .reset-btn{
-    background:transparent; border:1px solid var(--teal); color:var(--teal);
+    background:transparent; border:1px solid var(--blue); color:var(--blue-dark);
     padding:10px 22px; border-radius:999px; font-family:'Gothic A1',sans-serif;
     font-weight:700; cursor:pointer; font-size:14px;
   }
-  .reset-btn:hover{background:var(--teal); color:var(--ink);}
+  .reset-btn:hover{background:var(--blue); color:#fff;}
 
-  footer{text-align:center; color:var(--foam-dim); font-size:12px; margin-top:30px;}
+  footer{text-align:center; color:var(--ink-dim); font-size:12px; margin-top:30px;}
 
   @media (prefers-reduced-motion: reduce){
     .cap-btn.spin, .reel.pop, .seat.pop, .done-banner.show{animation:none;}
@@ -229,9 +228,9 @@
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">2026 회식 · LOBSTER SEAT DRAW</div>
-    <h1>오늘, 바다에서 만나요</h1>
-    <p class="sub">이름을 적고 <b>조개를 눌러</b> 번호를 뽑으세요. 다른 사람이 이미 뽑은 결과도 실시간으로 함께 보여요.<br>1~14번, 6인 테이블 3개 (5·5·4명) 랜덤 배치.</p>
+    <div class="eyebrow">2026 회식 · SEAT DRAW</div>
+    <h1>오늘 자리에 닻을 내려요</h1>
+    <p class="sub">이름을 적고 <b>구명튜브를 눌러</b> 번호를 뽑으세요. 다른 사람이 이미 뽑은 결과도 실시간으로 함께 보여요.<br>1~14번, 테이블 3개 (6·4·4명) 랜덤 배치.</p>
   </header>
 
   <div class="draw-panel">
@@ -240,9 +239,12 @@
     </div>
 
     <div class="stage">
-      <button class="cap-btn" id="capBtn">뽑 기</button>
+      <button class="cap-btn" id="capBtn">
+        <span class="ring"></span>
+        <span class="cap-inner"><span class="emoji">⚓</span><span class="label">뽑기</span></span>
+      </button>
       <div class="reel-wrap"><div class="reel" id="reel">?</div></div>
-      <div class="result-text" id="resultText">이름을 입력하고 조개를 눌러보세요</div>
+      <div class="result-text" id="resultText">이름을 입력하고 구명튜브를 눌러보세요</div>
       <div class="hint" id="remainHint">남은 번호 14개</div>
       <div class="status" id="statusText"></div>
     </div>
@@ -250,7 +252,7 @@
     <div class="pool" id="pool"></div>
 
     <div class="done-banner" id="doneBanner">
-      <div class="msg">🎉 전원 배치 완료! 맛있는 회식 되세요 🦞</div>
+      <div class="msg">🎉 전원 배치 완료! 맛있는 회식 되세요</div>
       <button class="reset-btn" id="resetBtn">다시 뽑기 (전체 초기화)</button>
     </div>
   </div>
@@ -267,8 +269,7 @@
 
 <script>
 /* =========================================================
-   ⚠️ 1. 아래 firebaseConfig를 본인 Firebase 프로젝트 값으로 교체하세요.
-      (Firebase 콘솔 > 프로젝트 설정 > 일반 > 내 앱 > SDK 설정 및 구성)
+   Firebase 프로젝트 설정값 (기존과 동일하게 유지)
    ========================================================= */
 const firebaseConfig = {
   apiKey: "AIzaSyBaatButaVgDvoFM9MFWuNX6up1i2BMSO0",
@@ -280,8 +281,7 @@ const firebaseConfig = {
   appId: "1:971259762582:web:02359be00fbdf003b1efb7"
 };
 
-/* ⚠️ 2. 이 이벤트를 구분하는 이름입니다. 나중에 다른 모임에서 재사용하려면
-   이 값을 바꿔서(예: 'hoesik-2026-summer') 서로 데이터가 섞이지 않게 하세요. */
+/* 이 이벤트를 구분하는 이름입니다. 기존 데이터와 동일하게 유지합니다. */
 const ROOM_ID = "hoesik-2026";
 
 firebase.initializeApp(firebaseConfig);
@@ -289,17 +289,18 @@ const db = firebase.database();
 const seatingRef = db.ref('seatings/' + ROOM_ID + '/assignments');
 
 (function(){
+  // ⚠️ 테이블 구성: 6명 / 4명 / 4명
   const TABLES = [
-    { id:'t1', name:'1번 테이블', range:[1,5]  },
-    { id:'t2', name:'2번 테이블', range:[6,10] },
+    { id:'t1', name:'1번 테이블', range:[1,6]  },
+    { id:'t2', name:'2번 테이블', range:[7,10] },
     { id:'t3', name:'3번 테이블', range:[11,14]},
   ];
 
   const flavor = [
-    (n,t)=>`${n}번 조개를 열었더니 ${t} 자리네요!`,
-    (n,t)=>`파도에 실려온 번호는 ${n}번, ${t}으로 안내합니다.`,
-    (n,t)=>`오늘의 자리는 ${t} ${n}번 — 짜잔!`,
-    (n,t)=>`${n}번 뽑았습니다. ${t}에서 만나요 🦞`,
+    (n,t)=>`${n}번, 닻을 내린 곳은 ${t}입니다!`,
+    (n,t)=>`파도를 타고 온 번호 ${n}번 — ${t}으로 안내합니다.`,
+    (n,t)=>`구명튜브를 던졌더니 ${n}번! ${t} 자리예요.`,
+    (n,t)=>`오늘의 항구는 ${t} ${n}번 — 짜잔! ⚓`,
   ];
 
   let currentAssignments = {};   // { "3": {name, ts}, ... } - Firebase에서 실시간으로 받아옴
@@ -317,20 +318,6 @@ const seatingRef = db.ref('seatings/' + ROOM_ID + '/assignments');
   const logList = document.getElementById('logList');
   const doneBanner = document.getElementById('doneBanner');
   const resetBtn = document.getElementById('resetBtn');
-
-  function crimpPath(flutes){
-    const pts = [];
-    const steps = flutes*2;
-    for(let i=0;i<steps;i++){
-      const angle = (i/steps)*Math.PI*2 - Math.PI/2;
-      const r = (i%2===0) ? 50 : 44;
-      const x = 50 + r*Math.cos(angle);
-      const y = 50 + r*Math.sin(angle);
-      pts.push(`${x.toFixed(2)}% ${y.toFixed(2)}%`);
-    }
-    return `polygon(${pts.join(',')})`;
-  }
-  capBtn.style.clipPath = crimpPath(16);
 
   function buildTables(){
     tablesEl.innerHTML = '';
@@ -381,7 +368,6 @@ const seatingRef = db.ref('seatings/' + ROOM_ID + '/assignments');
     return list;
   }
 
-  // Firebase에서 데이터가 바뀔 때마다(누가 뽑든) 모든 화면을 다시 그림
   seatingRef.on('value', (snapshot)=>{
     currentAssignments = snapshot.val() || {};
     renderFromData();
@@ -390,7 +376,6 @@ const seatingRef = db.ref('seatings/' + ROOM_ID + '/assignments');
   });
 
   function renderFromData(){
-    // 좌석 채우기
     for(let n=1;n<=14;n++){
       const seat = document.getElementById('seat-'+n);
       const chip = document.getElementById('chip-'+n);
@@ -398,10 +383,8 @@ const seatingRef = db.ref('seatings/' + ROOM_ID + '/assignments');
       if(entry){
         if(!seat.classList.contains('filled')){
           seat.classList.add('filled');
-          seat.querySelector('.who').textContent = entry.name;
-        } else {
-          seat.querySelector('.who').textContent = entry.name;
         }
+        seat.querySelector('.who').textContent = entry.name;
         if(chip) chip.classList.add('used');
       } else {
         seat.classList.remove('filled');
@@ -410,7 +393,6 @@ const seatingRef = db.ref('seatings/' + ROOM_ID + '/assignments');
       }
     }
 
-    // 명단 (뽑은 시간순)
     const entries = Object.keys(currentAssignments).map(k=>({
       num:Number(k), name:currentAssignments[k].name, ts:currentAssignments[k].ts||0
     })).sort((a,b)=>b.ts-a.ts);
@@ -465,10 +447,10 @@ const seatingRef = db.ref('seatings/' + ROOM_ID + '/assignments');
       for(let n=1;n<=14;n++) if(!taken.includes(n)) avail.push(n);
       if(avail.length===0){
         myPick = null;
-        return; // 이미 다 찼음 - 중단
+        return;
       }
       const pick = avail[Math.floor(Math.random()*avail.length)];
-      myPick = pick; // 이 함수가 마지막으로 실행된 시점 값이 실제 반영됨
+      myPick = pick;
       currentData[pick] = { name: name, ts: Date.now() };
       return currentData;
     }, function(error, committed, snapshot){
@@ -479,7 +461,7 @@ const seatingRef = db.ref('seatings/' + ROOM_ID + '/assignments');
         statusText.textContent = '저장 중 오류가 발생했어요. 다시 시도해주세요.';
         nameInput.disabled = false;
         capBtn.disabled = false;
-        resultText.textContent = '이름을 입력하고 조개를 눌러보세요';
+        resultText.textContent = '이름을 입력하고 구명튜브를 눌러보세요';
         return;
       }
       if(!committed || myPick===null){
@@ -512,7 +494,7 @@ const seatingRef = db.ref('seatings/' + ROOM_ID + '/assignments');
     if(!confirm('정말 전체 배치를 초기화할까요? 지금까지 뽑은 결과가 모두 삭제됩니다.')) return;
     seatingRef.remove();
     reel.textContent = '?';
-    resultText.textContent = '이름을 입력하고 조개를 눌러보세요';
+    resultText.textContent = '이름을 입력하고 구명튜브를 눌러보세요';
     statusText.textContent = '';
     nameInput.disabled = false;
     capBtn.disabled = false;

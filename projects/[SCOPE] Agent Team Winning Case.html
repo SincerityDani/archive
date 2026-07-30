@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>팀에이전트 프로젝트 주제 안내서 · 현대커머셜</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16171A;
+    --ink-2:#565A61;
+    --paper:#ECECE9;
+    --surface:#FFFFFF;
+    --line:#D7D6D1;
+    --line-2:#E7E6E2;
+    --signal:#A5680F;
+    --signal-tint:#F4EBD9;
+    --signal-line:#DFC79A;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+  .mono{font-family:var(--mono);font-feature-settings:"ss01";}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 64px;border-bottom:1px solid var(--line)}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-2);display:flex;gap:14px;align-items:center;
+  }
+  .eyebrow::after{content:"";height:1px;flex:1;background:var(--line);max-width:220px}
+  .hero h1{
+    font-size:clamp(38px,6.4vw,74px);font-weight:800;letter-spacing:-.03em;
+    line-height:1.02;margin:26px 0 0;
+  }
+  .hero h1 em{font-style:normal;color:var(--signal)}
+  .thesis{
+    font-size:clamp(17px,2vw,21px);color:var(--ink);font-weight:500;
+    max-width:660px;margin:30px 0 0;line-height:1.55;
+  }
+  .thesis b{font-weight:700;box-shadow:inset 0 -.5em 0 var(--signal-tint)}
+  .subline{font-size:15px;color:var(--ink-2);max-width:600px;margin:16px 0 0}
+
+  /* single vs team comparison */
+  .compare{
+    margin-top:52px;display:grid;grid-template-columns:1fr 1fr;gap:0;
+    border:1px solid var(--line);background:var(--surface);
+  }
+  .compare > div{padding:30px 32px}
+  .compare > div:first-child{border-right:1px solid var(--line)}
+  .compare .clabel{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+  .compare .cname{font-size:19px;font-weight:700;margin:12px 0 4px}
+  .compare .cdesc{font-size:14px;color:var(--ink-2);line-height:1.5}
+  .compare svg{margin-top:22px;display:block;overflow:visible}
+  .compare .team .cname{color:var(--signal)}
+
+  /* ---------- CONDITIONS ---------- */
+  .section-head{padding:64px 0 8px}
+  .section-head .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--signal)}
+  .section-head h2{font-size:clamp(24px,3vw,32px);font-weight:800;letter-spacing:-.02em;margin-top:10px}
+  .section-head p{color:var(--ink-2);max-width:640px;margin-top:12px;font-size:15px}
+
+  .conds{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:28px 0 8px}
+  .cond{background:var(--surface);border:1px solid var(--line);padding:28px 30px}
+  .cond .num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--signal);letter-spacing:.05em}
+  .cond h3{font-size:19px;font-weight:700;margin:8px 0 6px;letter-spacing:-.01em}
+  .cond p{font-size:14.5px;color:var(--ink-2);line-height:1.55}
+  .cond .tag{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin-top:14px;display:block}
+
+  .whynow{
+    margin:20px 0 0;background:var(--ink);color:#EDEDEA;padding:26px 30px;
+    display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap;
+  }
+  .whynow .wlabel{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--signal-line);white-space:nowrap;padding-top:2px}
+  .whynow p{font-size:15px;line-height:1.6;max-width:760px}
+  .whynow p b{color:#fff;font-weight:700}
+
+  /* ---------- CATALOG ---------- */
+  .cat-label{
+    display:flex;align-items:baseline;gap:16px;margin:64px 0 0;padding-bottom:14px;border-bottom:2px solid var(--ink);
+  }
+  .cat-label .idx{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+  .cat-label h2{font-size:22px;font-weight:800;letter-spacing:-.01em}
+  .cat-label .meta{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+
+  .card{
+    background:var(--surface);border:1px solid var(--line);padding:0;
+    display:flex;flex-direction:column;position:relative;
+  }
+  .card.hero-card{border-color:var(--signal-line);box-shadow:0 0 0 1px var(--signal-line)}
+  .card.span2{grid-column:1 / -1}
+  .card-top{padding:24px 28px 0;display:flex;align-items:flex-start;gap:14px}
+  .code{
+    font-family:var(--mono);font-size:13px;font-weight:600;color:var(--ink);
+    border:1px solid var(--ink);padding:3px 9px;letter-spacing:.04em;white-space:nowrap;
+  }
+  .hero-card .code{background:var(--signal);color:#fff;border-color:var(--signal)}
+  .patt{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .patt .plabel{font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.04em}
+  .herobadge{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--signal);border:1px solid var(--signal-line);background:var(--signal-tint);
+    padding:3px 8px;
+  }
+  .card h3{font-size:21px;font-weight:800;letter-spacing:-.02em;padding:16px 28px 0;line-height:1.2}
+  .oneline{padding:10px 28px 0;font-size:15px;color:var(--ink);font-weight:500;line-height:1.5}
+  .feature{
+    margin:20px 28px 0;padding:14px 16px;background:var(--paper);border-left:2px solid var(--ink);
+    font-size:13.5px;color:var(--ink-2);line-height:1.55;
+  }
+  .feature b{color:var(--ink);font-weight:600}
+
+  .qa{padding:6px 28px 0;display:grid;grid-template-columns:1fr 1fr;gap:0 26px}
+  .qa .block{padding:16px 0;border-top:1px solid var(--line-2)}
+  .qa .block .q{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--signal);display:flex;align-items:center;gap:7px}
+  .qa .block .a{font-size:13.5px;color:var(--ink);line-height:1.5;margin-top:7px}
+  .qa .block .a b{font-weight:700}
+
+  .wholine{margin:4px 28px 26px;padding-top:16px;border-top:1px solid var(--line-2);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .wholine .wl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+  .chip{font-size:12.5px;color:var(--ink);background:var(--paper);border:1px solid var(--line);padding:4px 11px;border-radius:2px}
+
+  /* pattern glyph */
+  .glyph{display:block;overflow:visible}
+  .glyph .n{fill:var(--ink)}
+  .glyph .nv{fill:var(--signal)}
+  .glyph .l{stroke:var(--ink-2);stroke-width:1.4;fill:none}
+  .glyph .lv{stroke:var(--signal);stroke-width:1.4;fill:none}
+
+  /* ---------- FOOTER ---------- */
+  .foot{margin-top:72px;border-top:1px solid var(--line);padding:44px 0 72px}
+  .foot .big{font-size:clamp(20px,2.6vw,28px);font-weight:800;letter-spacing:-.02em;max-width:820px;line-height:1.3}
+  .foot .big em{font-style:normal;color:var(--signal)}
+  .foot .row{margin-top:28px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.06em}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+
+  @media (max-width:820px){
+    .wrap{padding:0 20px}
+    .hero{padding:56px 0 44px}
+    .compare{grid-template-columns:1fr}
+    .compare > div:first-child{border-right:none;border-bottom:1px solid var(--line)}
+    .conds{grid-template-columns:1fr}
+    .grid{grid-template-columns:1fr}
+    .qa{grid-template-columns:1fr}
+    .whynow{flex-direction:column;gap:10px}
+    .cat-label .meta{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rv{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">SCOPE LABS · AI AGENT TEAM · 현대커머셜</div>
+    <h1>한 명에게 다 시키지 않는다.<br><em>일을 쪼개고, 검사를 분리한다.</em></h1>
+    <p class="thesis">
+      에이전트 팀은 <b>역할을 나눌 때가 아니라 일을 나눌 때</b>, 그리고
+      <b>만드는 AI와 검사하는 AI를 분리할 때</b> 단일 AI를 이깁니다.
+      나머지 경우엔 굳이 팀을 만들 이유가 없습니다.
+    </p>
+    <p class="subline">
+      아래 8개 프로젝트는 모두 "단일 AI 한 명으로는 구조적으로 안 되는 일"만 골랐습니다.
+      각 프로젝트가 무엇이고, 왜 팀이어야 하며, 왜 실무에 필요한지 정리했습니다.
+    </p>
+
+    <div class="compare">
+      <div class="single">
+        <div class="clabel">방식 A — 단일 AI</div>
+        <div class="cname">한 명이 순서대로</div>
+        <div class="cdesc">하나의 AI가 모든 걸 순차 처리합니다. 넓게 못 보고, 자기가 만든 결과를 자기가 검토해 실수를 놓칩니다.</div>
+        <svg class="glyph" width="220" height="60" viewBox="0 0 220 60" aria-hidden="true">
+          <circle class="n" cx="20" cy="30" r="7"/>
+          <path class="l" d="M31 30 H196" stroke-dasharray="2 6"/>
+          <text x="20" y="52" class="mono" font-size="10" fill="#565A61" text-anchor="middle">AI</text>
+          <text x="196" y="34" class="mono" font-size="11" fill="#565A61">결과</text>
+        </svg>
+      </div>
+      <div class="team">
+        <div class="clabel">방식 B — 에이전트 팀</div>
+        <div class="cname">동시에 나눠 + 따로 검사</div>
+        <div class="cdesc">일을 쪼개 여러 AI가 병렬로 처리하고, 별도의 검증 AI가 결과를 걸러냅니다. 넓고, 정확합니다.</div>
+        <svg class="glyph" width="260" height="60" viewBox="0 0 260 60" aria-hidden="true">
+          <circle class="n" cx="18" cy="30" r="7"/>
+          <path class="l" d="M27 27 C60 10, 70 10, 96 12"/>
+          <path class="l" d="M27 30 H96"/>
+          <path class="l" d="M27 33 C60 50, 70 50, 96 48"/>
+          <circle class="n" cx="104" cy="12" r="6"/>
+          <circle class="n" cx="104" cy="30" r="6"/>
+          <circle class="n" cx="104" cy="48" r="6"/>
+          <path class="l" d="M110 12 C140 22, 150 24, 172 30"/>
+          <path class="l" d="M110 30 H172"/>
+          <path class="l" d="M110 48 C140 38, 150 36, 172 30"/>
+          <circle class="nv" cx="182" cy="30" r="7"/>
+          <path class="lv" d="M191 30 H236"/>
+          <circle class="nv" cx="243" cy="30" r="5"/>
+          <text x="104" y="0" class="mono" font-size="9.5" fill="#565A61" text-anchor="middle" dy="4">병렬</text>
+          <text x="182" y="54" class="mono" font-size="9.5" fill="#A5680F" text-anchor="middle">검증</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CONDITIONS ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="kicker">이기는 두 조건</div>
+      <h2>팀이 이기는 경우는 딱 둘뿐입니다</h2>
+      <p>모든 프로젝트는 아래 둘 중 하나, 또는 둘 다에 해당합니다. 이 조건을 벗어나면 단일 AI가 더 낫습니다 — 그래서 아래 주제만 골랐습니다.</p>
+    </div>
+
+    <div class="conds">
+      <div class="cond rv">
+        <div class="num">① 병렬 폭</div>
+        <h3>동시에, 넓게 훑어야 하는 일</h3>
+        <p>수십 개 대상을 한 명이 순서대로 보면 뒤로 갈수록 얕아집니다. 여러 AI가 각자 한 조각씩 동시에 깊게 파야 넓고 균질한 결과가 나옵니다.</p>
+        <span class="tag">예 · 여러 기업 실사 / 업종 감시 / 후보 발굴</span>
+      </div>
+      <div class="cond rv">
+        <div class="num">② 생성-검증 분리</div>
+        <h3>만드는 자와 검사하는 자를 나눠야 하는 일</h3>
+        <p>자기가 만든 결과를 자기가 검토하면 실수를 못 봅니다. 리스크가 큰 업무일수록, 검증만 전담하는 별도 AI가 있어야 "그럴듯한 것"과 "실제로 맞는 것"이 갈립니다.</p>
+        <span class="tag">예 · 리스크 적출 / 규정 검수 / 문서 대조</span>
+      </div>
+    </div>
+
+    <div class="whynow rv">
+      <div class="wlabel">왜 지금, 커머셜인가</div>
+      <p>
+        건설경기 침체로 연체율이 오르는 지금, <b>넓게 보고 걸러내는 일이 곧 손익</b>입니다.
+        리스크를 놓치면 부실로 직결되고, 신호를 늦게 잡으면 대응할 시간을 잃습니다.
+        아래 커머셜 프로젝트는 대부분 두 조건을 동시에 요구하는 <b>고위험 업무</b>라,
+        팀의 우위가 가장 분명하게 드러납니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMMERCIAL CATALOG ============ -->
+<section>
+  <div class="wrap">
+    <div class="cat-label rv">
+      <span class="idx">01</span>
+      <h2>커머셜 부문</h2>
+      <span class="meta">6 PROJECTS · C1–C6</span>
+    </div>
+
+    <div class="grid">
+
+      <!-- C1 HERO -->
+      <article class="card hero-card span2 rv">
+        <div class="card-top">
+          <span class="code">C1</span>
+          <div class="patt">
+            <span class="herobadge">Hero</span>
+            <span class="plabel">① + ②</span>
+            <svg class="glyph" width="72" height="26" viewBox="0 0 72 26" aria-hidden="true">
+              <circle class="n" cx="7" cy="13" r="4.5"/>
+              <path class="l" d="M12 11 L26 6"/><path class="l" d="M12 13 H26"/><path class="l" d="M12 15 L26 20"/>
+              <circle class="n" cx="30" cy="6" r="3.5"/><circle class="n" cx="30" cy="13" r="3.5"/><circle class="n" cx="30" cy="20" r="3.5"/>
+              <path class="l" d="M34 6 L48 12"/><path class="l" d="M34 13 H48"/><path class="l" d="M34 20 L48 14"/>
+              <circle class="nv" cx="53" cy="13" r="4.5"/><path class="lv" d="M58 13 H66"/><circle class="nv" cx="68" cy="13" r="3"/>
+            </svg>
+          </div>
+        </div>
+        <h3>여신 심사 실사 + 리스크 검증</h3>
+        <p class="oneline">여신 신청 기업 여러 곳을 동시에 실사하고, 별도의 검증 AI가 위험 신호만 뽑아 심사역에게 넘기는 프로젝트.</p>
+        <div class="feature"><b>이런 프로젝트입니다.</b> 신청기업별로 재무·업황·소송/체납 이력을 병렬로 조사하고, 리스크 검증 AI가 여신 정책 기준에 어긋나는 항목만 적출해 심사 메모 초안까지 만들어 줍니다.</div>
+        <div class="qa">
+          <div class="block"><div class="q">✕ 단일 AI로는</div><div class="a">여러 기업을 동시에 깊이 못 보고, 자기가 정리한 신청서의 위험을 <b>스스로 축소</b>합니다.</div></div>
+          <div class="block"><div class="q">✓ 팀이어야</div><div class="a">조사 담당과 리스크 검증 담당을 <b>분리</b>해야 "그럴듯한 신청"과 "실제 안전한 여신"이 갈립니다.</div></div>
+          <div class="block"><div class="q">▲ 실무 투입 이유</div><div class="a">리스크 미적출은 곧 부실. 심사 착수까지의 시간을 크게 줄이고 누락을 막습니다.</div></div>
+          <div class="block"><div class="q">◆ 핵심 장점</div><div class="a">조사 커버리지↑, 리스크 누락↓. 심사역은 최종 <b>판단에만 집중</b>.</div></div>
+        </div>
+        <div class="wholine"><span class="wl">쓰는 사람</span><span class="chip">여신심사역</span><span class="chip">기업·산업금융 팀장</span><span class="chip">리스크관리</span></div>
+      </article>
+
+      <!-- C5 HERO -->
+      <article class="card hero-card span2 rv">
+        <div class="card-top">
+          <span class="code">C5</span>
+          <div class="patt">
+            <span class="herobadge">Hero</span>
+            <span class="plabel">① + ②</span>
+            <svg class="glyph" width="72" height="26" viewBox="0 0 72 26" aria-hidden="true">
+              <circle class="n" cx="7" cy="13" r="4.5"/>
+              <path class="l" d="M12 11 L26 6"/><path class="l" d="M12 13 H26"/><path class="l" d="M12 15 L26 20"/>
+              <circle class="n" cx="30" cy="6" r="3.5"/><circle class="n" cx="30" cy="13" r="3.5"/><circle class="n" cx="30" cy="20" r="3.5"/>
+              <path class="l" d="M34 6 L48 12"/><path class="l" d="M34 13 H48"/><path class="l" d="M34 20 L48 14"/>
+              <circle class="nv" cx="53" cy="13" r="4.5"/><path class="lv" d="M58 13 H66"/><circle class="nv" cx="68" cy="13" r="3"/>
+            </svg>
+          </div>
+        </div>
+        <h3>여신 포트폴리오 업황 조기경보</h3>
+        <p class="oneline">여신이 걸린 업종·차주군을 동시에 감시해, 위험 신호를 터지기 전에 잡아내는 프로젝트.</p>
+        <div class="feature"><b>이런 프로젝트입니다.</b> 포트폴리오가 걸친 업종(건설·물류·운송 등)을 병렬로 스캔해 발주 급감·연체·규제 변화 같은 신호를 모으고, 검증 AI가 단순 뉴스(노이즈)를 걸러 실제 조기경보만 남깁니다.</div>
+        <div class="qa">
+          <div class="block"><div class="q">✕ 단일 AI로는</div><div class="a">여러 업종을 한 번에 못 훑고, 진짜 위험과 <b>그냥 뉴스</b>를 구분하지 못합니다.</div></div>
+          <div class="block"><div class="q">✓ 팀이어야</div><div class="a">스캔 담당과 신호 판정 담당을 나눠야 노이즈에 휘둘리지 않는 경보가 나옵니다.</div></div>
+          <div class="block"><div class="q">▲ 실무 투입 이유</div><div class="a">연체가 터진 뒤가 아니라 <b>터지기 전에</b> 압니다. 선제적 리스크 관리 그 자체.</div></div>
+          <div class="block"><div class="q">◆ 핵심 장점</div><div class="a">사각지대 축소, 조기 대응. 한도·심사 정책에 즉시 반영 가능.</div></div>
+        </div>
+        <div class="wholine"><span class="wl">쓰는 사람</span><span class="chip">리스크관리</span><span class="chip">여신관리</span><span class="chip">심사</span></div>
+      </article>
+
+      <!-- C2 -->
+      <article class="card rv">
+        <div class="card-top">
+          <span class="code">C2</span>
+          <div class="patt"><span class="plabel">① + ②</span>
+            <svg class="glyph" width="62" height="24" viewBox="0 0 72 26" aria-hidden="true">
+              <circle class="n" cx="7" cy="13" r="4.5"/><path class="l" d="M12 11 L26 6"/><path class="l" d="M12 13 H26"/><path class="l" d="M12 15 L26 20"/>
+              <circle class="n" cx="30" cy="6" r="3.5"/><circle class="n" cx="30" cy="13" r="3.5"/><circle class="n" cx="30" cy="20" r="3.5"/>
+              <path class="l" d="M34 6 L48 12"/><path class="l" d="M34 13 H48"/><path class="l" d="M34 20 L48 14"/>
+              <circle class="nv" cx="53" cy="13" r="4.5"/><path class="lv" d="M58 13 H66"/><circle class="nv" cx="68" cy="13" r="3"/>
+            </svg>
+          </div>
+        </div>
+        <h3>투자금융 딜 소싱·발굴</h3>
+        <p class="oneline">신규 투자·여신 후보를 넓게 발굴하고, 위험·충돌 후보를 걸러 숏리스트를 만드는 프로젝트.</p>
+        <div class="feature"><b>이런 프로젝트입니다.</b> 후보 기업·딜을 병렬로 프로파일링한 뒤, 검증 AI가 재무 부실·평판·기존 거래 충돌을 걸러 투자심의에 바로 올릴 숏리스트를 만듭니다.</div>
+        <div class="qa">
+          <div class="block"><div class="q">✕ 단일 AI로는</div><div class="a">후보를 넓게 못 보고, 자기가 추천한 후보의 <b>리스크를 축소</b>합니다.</div></div>
+          <div class="block"><div class="q">✓ 팀이어야</div><div class="a">발굴 담당 ≠ 검증 담당이라야 바로 쓸 수 있는 숏리스트가 됩니다.</div></div>
+          <div class="block"><div class="q">▲ 실무 투입 이유</div><div class="a">투자금융은 신성장 축. 파이프라인 발굴 속도를 끌어올립니다.</div></div>
+          <div class="block"><div class="q">◆ 핵심 장점</div><div class="a">후보 커버리지↑, 부실·충돌 후보 <b>사전 제거</b>.</div></div>
+        </div>
+        <div class="wholine"><span class="wl">쓰는 사람</span><span class="chip">투자금융</span><span class="chip">사업개발</span></div>
+      </article>
+
+      <!-- C3 -->
+      <article class="card rv">
+        <div class="card-top">
+          <span class="code">C3</span>
+          <div class="patt"><span class="plabel">① + ②</span>
+            <svg class="glyph" width="62" height="24" viewBox="0 0 72 26" aria-hidden="true">
+              <circle class="n" cx="7" cy="13" r="4.5"/><path class="l" d="M12 11 L26 6"/><path class="l" d="M12 13 H26"/><path class="l" d="M12 15 L26 20"/>
+              <circle class="n" cx="30" cy="6" r="3.5"/><circle class="n" cx="30" cy="13" r="3.5"/><circle class="n" cx="30" cy="20" r="3.5"/>
+              <path class="l" d="M34 6 L48 12"/><path class="l" d="M34 13 H48"/><path class="l" d="M34 20 L48 14"/>
+              <circle class="nv" cx="53" cy="13" r="4.5"/><path class="lv" d="M58 13 H66"/><circle class="nv" cx="68" cy="13" r="3"/>
+            </svg>
+          </div>
+        </div>
+        <h3>여신 계약·담보서류 정합성 검증</h3>
+        <p class="oneline">한 여신 건의 계약서·약관·품의서·담보서류 사이에 숨은 조건 모순을 잡아내는 프로젝트.</p>
+        <div class="feature"><b>이런 프로젝트입니다.</b> 문서별로 핵심 조건(금리·상환·담보 범위·특약)을 병렬 추출하고, 대조 검증 AI가 문서 간 불일치만 짚어 실행 전에 바로잡게 합니다.</div>
+        <div class="qa">
+          <div class="block"><div class="q">✕ 단일 AI로는</div><div class="a">여러 문서를 동시에 들고 <b>교차 대조</b>하기 어렵고, 대체로 일치한다고 뭉갭니다.</div></div>
+          <div class="block"><div class="q">✓ 팀이어야</div><div class="a">추출 담당과 대조 판정 담당을 나눠야 모순이 정확히 드러납니다.</div></div>
+          <div class="block"><div class="q">▲ 실무 투입 이유</div><div class="a">조건 불일치는 곧 손실·분쟁·회수 실패. 실행 전 <b>최종 안전장치</b>.</div></div>
+          <div class="block"><div class="q">◆ 핵심 장점</div><div class="a">계약 사고 예방, 서류 점검 시간 단축.</div></div>
+        </div>
+        <div class="wholine"><span class="wl">쓰는 사람</span><span class="chip">여신관리</span><span class="chip">심사</span><span class="chip">법무·준법</span></div>
+      </article>
+
+      <!-- C4 -->
+      <article class="card rv">
+        <div class="card-top">
+          <span class="code">C4</span>
+          <div class="patt"><span class="plabel">①</span>
+            <svg class="glyph" width="52" height="24" viewBox="0 0 58 26" aria-hidden="true">
+              <circle class="n" cx="7" cy="13" r="4.5"/><path class="l" d="M12 11 L26 6"/><path class="l" d="M12 13 H26"/><path class="l" d="M12 15 L26 20"/>
+              <circle class="n" cx="30" cy="6" r="3.5"/><circle class="n" cx="30" cy="13" r="3.5"/><circle class="n" cx="30" cy="20" r="3.5"/>
+              <path class="l" d="M34 6 L48 12"/><path class="l" d="M34 13 H48"/><path class="l" d="M34 20 L48 14"/>
+              <circle class="n" cx="52" cy="13" r="4.5"/>
+            </svg>
+          </div>
+        </div>
+        <h3>경쟁 캐피탈사 벤치마킹</h3>
+        <p class="oneline">경쟁 캐피탈사의 상용차·설비 금융 상품을 동시에 조사해 비교표를 만드는 프로젝트.</p>
+        <div class="feature"><b>이런 프로젝트입니다.</b> 캐피탈사별로 금리·잔가보장·선수율·프로모션·부가서비스를 병렬 조사해, 현대커머셜의 경쟁력 갭과 차별화 포인트를 한눈에 정리합니다.</div>
+        <div class="qa">
+          <div class="block"><div class="q">✕ 단일 AI로는</div><div class="a">순차 조사라 뒤로 갈수록 얕아지고 회사 간 비교가 <b>불균질</b>합니다.</div></div>
+          <div class="block"><div class="q">✓ 팀이어야</div><div class="a">캐피탈사별 병렬 조사로 넓고 균질한 비교가 됩니다.</div></div>
+          <div class="block"><div class="q">▲ 실무 투입 이유</div><div class="a">금리 정책·프로모션 설계·딜러 제안의 근거 자료.</div></div>
+          <div class="block"><div class="q">◆ 핵심 장점</div><div class="a">넓고 균질한 비교, <b>출처 명시</b>된 근거.</div></div>
+        </div>
+        <div class="wholine"><span class="wl">쓰는 사람</span><span class="chip">상품기획</span><span class="chip">영업기획</span></div>
+      </article>
+
+      <!-- C6 -->
+      <article class="card rv">
+        <div class="card-top">
+          <span class="code">C6</span>
+          <div class="patt"><span class="plabel">① + ②</span>
+            <svg class="glyph" width="62" height="24" viewBox="0 0 72 26" aria-hidden="true">
+              <circle class="n" cx="7" cy="13" r="4.5"/><path class="l" d="M12 11 L26 6"/><path class="l" d="M12 13 H26"/><path class="l" d="M12 15 L26 20"/>
+              <circle class="n" cx="30" cy="6" r="3.5"/><circle class="n" cx="30" cy="13" r="3.5"/><circle class="n" cx="30" cy="20" r="3.5"/>
+              <path class="l" d="M34 6 L48 12"/><path class="l" d="M34 13 H48"/><path class="l" d="M34 20 L48 14"/>
+              <circle class="nv" cx="53" cy="13" r="4.5"/><path class="lv" d="M58 13 H66"/><circle class="nv" cx="68" cy="13" r="3"/>
+            </svg>
+          </div>
+        </div>
+        <h3>담보 자산 가치 평가</h3>
+        <p class="oneline">상용차·건설장비 담보의 시세·잔존가치를 여러 소스로 조사하고 검증하는 프로젝트.</p>
+        <div class="feature"><b>이런 프로젝트입니다.</b> 자산·모델별 중고 시세를 흩어진 소스에서 병렬로 모으고, 검증 AI가 이상치·저신뢰 출처를 걸러 담보 적정성 판단 근거를 제공합니다.</div>
+        <div class="qa">
+          <div class="block"><div class="q">✕ 단일 AI로는</div><div class="a">흩어진 시세를 병렬로 못 모으고, 튀는 <b>이상치를 못 거릅니다</b>.</div></div>
+          <div class="block"><div class="q">✓ 팀이어야</div><div class="a">시세 조사 담당과 이상치 검증 담당을 분리해야 신뢰할 수 있습니다.</div></div>
+          <div class="block"><div class="q">▲ 실무 투입 이유</div><div class="a">담보 과대평가 방지 = 회수 리스크 관리.</div></div>
+          <div class="block"><div class="q">◆ 핵심 장점</div><div class="a">다중 소스로 <b>검증된 시세 범위</b>, 담보 적정성 근거.</div></div>
+        </div>
+        <div class="wholine"><span class="wl">쓰는 사람</span><span class="chip">여신심사</span><span class="chip">자산·채권관리</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CARD CATALOG ============ -->
+<section>
+  <div class="wrap">
+    <div class="cat-label rv">
+      <span class="idx">02</span>
+      <h2>카드 부문</h2>
+      <span class="meta">커머셜로 옮기면 어색한 주제 · 카드로 유지</span>
+    </div>
+
+    <div class="grid">
+
+      <!-- K1 -->
+      <article class="card rv">
+        <div class="card-top">
+          <span class="code">K1</span>
+          <div class="patt"><span class="plabel">②</span>
+            <svg class="glyph" width="58" height="24" viewBox="0 0 64 26" aria-hidden="true">
+              <circle class="n" cx="8" cy="13" r="5"/><path class="l" d="M14 13 H30"/>
+              <circle class="n" cx="36" cy="13" r="5"/><path class="lv" d="M42 13 H54"/>
+              <circle class="nv" cx="58" cy="13" r="4"/>
+            </svg>
+          </div>
+        </div>
+        <h3>혜택 고지문 컴플라이언스 검수</h3>
+        <p class="oneline">카드 혜택 고지문 초안을 규정 체크리스트로 검수해 위반·누락을 잡는 프로젝트.</p>
+        <div class="feature"><b>이런 프로젝트입니다.</b> 작성 AI가 만든 고지문을, 검수 전담 AI가 준법팀 규정 체크리스트에 대조해 필수 고지 누락과 과장 표현만 짚어 수정으로 넘깁니다. <b>왜 카드인가</b> — 소비자 광고 규제라 B2B로 옮기면 억지스러워 카드로 유지.</div>
+        <div class="qa">
+          <div class="block"><div class="q">✕ 단일 AI로는</div><div class="a">자기가 쓴 문구를 자기가 검토해 <b>누락·과장을 못 잡습니다</b>.</div></div>
+          <div class="block"><div class="q">✓ 팀이어야</div><div class="a">작성 담당 ≠ 검수 담당이라야 규정 위반이 걸러집니다.</div></div>
+          <div class="block"><div class="q">▲ 실무 투입 이유</div><div class="a">미준수 고지문은 상신 불가·제재 리스크. 바로 상신 가능한 문서로.</div></div>
+          <div class="block"><div class="q">◆ 핵심 장점</div><div class="a">필수 고지 누락 0, <b>규정 근거 명시</b>.</div></div>
+        </div>
+        <div class="wholine"><span class="wl">쓰는 사람</span><span class="chip">마케팅·카피</span><span class="chip">준법감시</span><span class="chip">상품기획</span></div>
+      </article>
+
+      <!-- K2 -->
+      <article class="card rv">
+        <div class="card-top">
+          <span class="code">K2</span>
+          <div class="patt"><span class="plabel">①</span>
+            <svg class="glyph" width="52" height="24" viewBox="0 0 58 26" aria-hidden="true">
+              <circle class="n" cx="7" cy="13" r="4.5"/><path class="l" d="M12 11 L26 6"/><path class="l" d="M12 13 H26"/><path class="l" d="M12 15 L26 20"/>
+              <circle class="n" cx="30" cy="6" r="3.5"/><circle class="n" cx="30" cy="13" r="3.5"/><circle class="n" cx="30" cy="20" r="3.5"/>
+              <path class="l" d="M34 6 L48 12"/><path class="l" d="M34 13 H48"/><path class="l" d="M34 20 L48 14"/>
+              <circle class="n" cx="52" cy="13" r="4.5"/>
+            </svg>
+          </div>
+        </div>
+        <h3>앱 리뷰·상담 VOC 대량 분석</h3>
+        <p class="oneline">앱 리뷰·상담 VOC 수천 건을 동시에 분류·요약해 이슈 테마와 우선순위를 뽑는 프로젝트.</p>
+        <div class="feature"><b>이런 프로젝트입니다.</b> 수천 건의 리뷰·VOC를 구간별로 병렬 분류하고, 종합 AI가 카드·기능별 이슈 테마와 빈도·심각도를 정리합니다. <b>왜 카드인가</b> — 소비자 앱 데이터라 B2B로 옮기면 어색해 카드로 유지.</div>
+        <div class="qa">
+          <div class="block"><div class="q">✕ 단일 AI로는</div><div class="a">수천 건이 한 번에 안 들어갑니다(<b>토큰 벽</b>). 앞부분만 보고 일반론으로 흐릅니다.</div></div>
+          <div class="block"><div class="q">✓ 팀이어야</div><div class="a">구간별 병렬 분류로 <b>전량</b>을 처리합니다.</div></div>
+          <div class="block"><div class="q">▲ 실무 투입 이유</div><div class="a">앱 개선·상품 리뉴얼 우선순위의 정량 근거.</div></div>
+          <div class="block"><div class="q">◆ 핵심 장점</div><div class="a">전량 커버, 정량 테마·우선순위 도출.</div></div>
+        </div>
+        <div class="wholine"><span class="wl">쓰는 사람</span><span class="chip">CX</span><span class="chip">디지털</span><span class="chip">상품기획</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap">
+    <p class="big">
+      "GPT로 되는 일이면 팀을 만들지 마세요."
+      우리는 <em>단일 AI로는 구조적으로 안 되는 일</em>에만 에이전트 팀을 씁니다.
+    </p>
+    <div class="row">
+      <span>SCOPE LABS · AI EDUCATION &amp; CONSULTING</span>
+      <span>AGENT TEAM PROJECT GUIDE · 현대커머셜</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = document.querySelectorAll('.rv');
+    if(reduce || !('IntersectionObserver' in window)){
+      els.forEach(function(e){e.classList.add('in')});
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    },{threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(e){io.observe(e)});
+  })();
+</script>
+
+</body>
+</html>

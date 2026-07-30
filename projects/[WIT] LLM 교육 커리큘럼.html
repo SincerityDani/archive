@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>리더 AI 교육 — 커리큘럼</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #F5F5F7;
+    --surface-2: #FBFBFD;
+    --ink: #1D1D1F;
+    --ink-2: #6E6E73;
+    --ink-3: #86868B;
+    --blue: #0071E3;
+    --blue-dark: #0058B0;
+    --blue-tint: #E8F2FC;
+    --line: #D2D2D7;
+    --font: "Pretendard", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+            "Apple SD Gothic Neo", "Malgun Gothic", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--blue); }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 16px;
+  }
+  .nav-btn {
+    background: none;
+    border: none;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-2);
+    padding: 8px 18px;
+    border-radius: 980px;
+    cursor: pointer;
+  }
+  .nav-btn.active {
+    background: var(--ink);
+    color: #ffffff;
+  }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px 100px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .hero { text-align: center; padding: 88px 24px 56px; }
+  .eyebrow { font-size: 14px; font-weight: 600; color: var(--blue); margin: 0 0 12px; }
+  .hero h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 16px; }
+  .hero p { font-size: 19px; color: var(--ink-2); max-width: 560px; margin: 0 auto; line-height: 1.5; }
+
+  .spec-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border-radius: 18px; overflow: hidden; margin: 0 0 64px; }
+  .spec-cell { background: var(--surface-2); padding: 24px 16px; text-align: center; }
+  .spec-num { font-size: 28px; font-weight: 700; color: var(--blue); margin: 0 0 4px; }
+  .spec-label { font-size: 13px; color: var(--ink-2); margin: 0; }
+
+  .module { border: 1px solid var(--line); border-radius: 22px; padding: 32px; margin-bottom: 20px; background: var(--surface-2); }
+  .module-top { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .module-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--blue-tint); color: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .module-order { font-size: 13px; font-weight: 600; color: var(--ink-3); }
+  .module h2 { font-size: 21px; font-weight: 700; margin: 0; }
+  .module-stage { font-size: 14px; color: var(--blue-dark); font-weight: 500; margin: 4px 0 18px 54px; }
+  .module-body { margin-left: 54px; }
+  .step-list { margin: 0 0 16px; padding-left: 18px; }
+  .step-list li { font-size: 15px; line-height: 1.7; color: var(--ink); margin-bottom: 2px; }
+  .example-box { background: var(--surface); border-radius: 12px; padding: 14px 18px; }
+  .example-label { font-size: 12px; font-weight: 600; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 6px; }
+  .example-box p { font-size: 14px; color: var(--ink-2); line-height: 1.7; margin: 0; }
+  .time-badge { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--blue); background: var(--blue-tint); padding: 4px 12px; border-radius: 8px; }
+
+  .page-head { padding: 56px 0 8px; }
+  .page-head .eyebrow { text-align: left; }
+  .page-head h1 { font-size: 34px; text-align: left; margin-bottom: 8px; }
+  .page-head p { font-size: 16px; text-align: left; margin: 0; max-width: none; }
+
+  .info-card { border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px; margin-bottom: 18px; background: var(--surface-2); }
+  .info-card h3 { font-size: 18px; font-weight: 700; margin: 0 0 4px; }
+  .info-card .learn { font-size: 14px; color: var(--ink-2); margin: 0 0 14px; line-height: 1.6; }
+  .info-card ul { margin: 0; padding-left: 18px; }
+  .info-card li { font-size: 14.5px; line-height: 1.75; color: var(--ink); margin-bottom: 4px; }
+
+  .turn { border: 1px solid var(--line); border-radius: 18px; padding: 24px 28px; margin-bottom: 16px; background: var(--surface-2); }
+  .turn-label { font-size: 12px; font-weight: 700; color: var(--blue); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
+  .request-box { background: var(--surface); border-left: 3px solid var(--blue); border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: 14px; line-height: 1.6; color: var(--ink); margin-bottom: 14px; }
+  .response-note { font-size: 14px; color: var(--ink-2); line-height: 1.65; margin: 0 0 14px; }
+  .response-note b { color: var(--ink); font-weight: 600; }
+
+  .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  .metric-card { background: var(--surface); border-radius: 12px; padding: 14px 16px; }
+  .metric-label { font-size: 12px; color: var(--ink-2); margin: 0 0 4px; }
+  .metric-value { font-size: 21px; font-weight: 700; margin: 0; color: var(--ink); }
+
+  .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .slider-row label { font-size: 13.5px; color: var(--ink-2); width: 104px; flex-shrink: 0; }
+  .slider-row input[type=range] { flex: 1; accent-color: var(--blue); }
+  .slider-row .val { font-size: 13.5px; font-weight: 600; min-width: 46px; text-align: right; }
+
+  .preset-btn { display: inline-block; background: #ffffff; border: 1px solid var(--line); color: var(--blue); border-radius: 980px; padding: 8px 16px; font-size: 13px; font-weight: 500; cursor: pointer; margin-bottom: 14px; font-family: var(--font); }
+
+  .doc-mock { background: var(--surface); border-radius: 14px; padding: 18px 20px; }
+  .doc-title { font-size: 16px; font-weight: 700; margin: 0 0 2px; }
+  .doc-meta { font-size: 12px; color: var(--ink-3); margin: 0 0 14px; }
+  .doc-section { font-size: 14px; font-weight: 700; margin: 12px 0 3px; }
+  .doc-body { font-size: 13.5px; color: var(--ink-2); margin: 0; line-height: 1.65; }
+  .diff { background: var(--blue-tint); color: var(--blue-dark); padding: 1px 4px; border-radius: 4px; }
+
+  .raw-mock { background: var(--surface); border-radius: 14px; padding: 16px 18px; font-size: 12.5px; line-height: 1.7; color: var(--ink-2); white-space: pre-wrap; }
+  .raw-mock b { color: var(--ink); }
+  .match-card { background: #ffffff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-top: 10px; }
+  .match-card .mc-title { font-size: 13.5px; font-weight: 700; margin: 0 0 4px; }
+  .match-card .mc-body { font-size: 13px; color: var(--ink-2); margin: 0; }
+
+  .summary-table { width: 100%; border-collapse: collapse; margin: 24px 0 40px; font-size: 13.5px; }
+  .summary-table th, .summary-table td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; }
+  .summary-table th { background: var(--surface); font-weight: 600; color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <button class="nav-btn active" data-panel="overview">커리큘럼</button>
+  <button class="nav-btn" data-panel="m1">M1</button>
+  <button class="nav-btn" data-panel="m2">M2</button>
+  <button class="nav-btn" data-panel="m3">M3</button>
+  <button class="nav-btn" data-panel="m4">M4</button>
+</div>
+
+<div class="wrap">
+
+  <div class="panel active" id="panel-overview">
+    <div class="hero">
+      <p class="eyebrow">리더 대상 AI/LLM 교육</p>
+      <h1>사업계획 수립 여정으로<br>배우는 Claude</h1>
+      <p>하루 4시간, 트렌드 이해부터 전략 방향 설정, 계획서 작성, 계획 검증까지 — 실제 사업계획을 완성해가는 흐름으로 구성했습니다.</p>
+    </div>
+
+    <div class="spec-strip">
+      <div class="spec-cell"><p class="spec-num">4.0H</p><p class="spec-label">총 교육 시간</p></div>
+      <div class="spec-cell"><p class="spec-num">4</p><p class="spec-label">모듈</p></div>
+      <div class="spec-cell"><p class="spec-num">3</p><p class="spec-label">실습 세션</p></div>
+      <div class="spec-cell"><p class="spec-num">1</p><p class="spec-label">완성되는 계획서</p></div>
+    </div>
+
+    <div class="module">
+      <div class="module-top">
+        <div class="module-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <span class="module-order">01</span>
+        <h2>AI/LLM 트렌드 및 인사이트</h2>
+        <span class="time-badge">1.0H</span>
+      </div>
+      <p class="module-stage">워밍업 · 강의형 (실습 없음)</p>
+      <div class="module-body">
+        <ul class="step-list">
+          <li>금융권 AI 활용 사례</li>
+          <li>LLM 오작동·부작용 리스크</li>
+          <li>AI Native 조직 구축 체계 (일하는 방식 / 예산 관리 / 거버넌스)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="module-top">
+        <div class="module-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <span class="module-order">02</span>
+        <h2>리더를 위한 Claude 익히기 (Artifacts)</h2>
+        <span class="time-badge">1.0H</span>
+      </div>
+      <p class="module-stage">전략적 방향 설정 — "무엇에 베팅할 것인가"</p>
+      <div class="module-body">
+        <ol class="step-list">
+          <li>내년 핵심 전략 옵션 1개 선정</li>
+          <li>Claude에 옵션과 부서 맥락 입력, 낙관·중립·비관 시나리오 분석 요청</li>
+          <li>Artifacts로 생성된 인터랙티브 시나리오 플래너 확인</li>
+          <li>부족한 항목 보완 요청</li>
+          <li>강사가 프롬프트 구체화 포인트(업종·수치·기간 명시) 리딩</li>
+        </ol>
+        <div class="example-box">
+          <p class="example-label">예시 · 경영지원본부</p>
+          <p>전략 옵션: "전사 공통 업무 프로세스 자동화(AX) 확대" → 낙관(인력 재배치·비용 절감) / 중립(부서별 도입 속도 편차) / 비관(초기 저항·전환 비용) 시나리오 플래너 생성</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="module-top">
+        <div class="module-icon"><i class="fa-solid fa-file-lines"></i></div>
+        <span class="module-order">03</span>
+        <h2>Projects를 활용한 업무 환경 구축</h2>
+        <span class="time-badge">1.0H</span>
+      </div>
+      <p class="module-stage">계획 문서화 — "이걸 어떻게 보고서로 만들 것인가"</p>
+      <div class="module-body">
+        <ol class="step-list">
+          <li>Project 생성 후 사내 사업계획서 양식·톤앤매너 자료 업로드</li>
+          <li>M2 전략 방향을 입력해 사업계획서 초안 생성 요청</li>
+          <li>특정 섹션 구체화 요청</li>
+          <li>Word / PPT로 결과물 내보내기</li>
+          <li>강사가 Project 지식 등록·반복 활용 포인트 리딩</li>
+        </ol>
+        <div class="example-box">
+          <p class="example-label">예시 · 경영지원본부</p>
+          <p>업로드: 경영지원본부 기존 사업계획서 양식 → "2027년 경영지원본부 AX 추진 계획" 초안 생성, "예산 및 인력 계획" 섹션을 구체 수치로 보완 요청</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="module-top">
+        <div class="module-icon"><i class="fa-solid fa-code"></i></div>
+        <span class="module-order">04</span>
+        <h2>클로드코드를 활용한 바이브코딩 (PBL)</h2>
+        <span class="time-badge">1.0H</span>
+      </div>
+      <p class="module-stage">계획 검증 — "이 결정, 과거에도 비슷한 적이 있었나?"</p>
+      <div class="module-body">
+        <ol class="step-list">
+          <li>M3 계획서 초안의 핵심 결정 사항 2~3개 추출</li>
+          <li>클로드코드에 과거 이메일·메신저 형태 더미데이터 생성과 매칭 웹페이지 제작을 함께 요청</li>
+          <li>클로드코드가 데이터 생성부터 코드 작성, 실행·오류 수정까지 진행하는 과정 확인</li>
+          <li>완성된 웹페이지에 핵심 결정 사항을 입력해 매칭 결과 확인, 조건 조정 요청</li>
+          <li>강사가 클로드코드 활용 이유와 과거 이력 없이도 시작 가능하다는 점 리딩</li>
+        </ol>
+        <div class="example-box">
+          <p class="example-label">예시 · 경영지원본부</p>
+          <p>핵심 결정: "전사 업무자동화 시스템 도입 예산 3억원 편성" → 과거 ERP 고도화 관련 이메일에서 "부서별 비용 분담 조건" 발견, 계획서에 반영</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-m1">
+    <div class="page-head">
+      <p class="eyebrow">Module 01</p>
+      <h1>AI/LLM 트렌드 및 인사이트</h1>
+      <p>워밍업 세션 · 강의형, 실습 없음</p>
+    </div>
+
+    <div class="info-card">
+      <h3>금융권 AI 활용 사례</h3>
+      <p class="learn">국내외 금융사가 생성형 AI·에이전틱 AI를 실제 업무의 어느 지점에 적용하고 있는지, 단순 챗봇을 넘어선 활용 단계는 어디까지 왔는지</p>
+      <ul>
+        <li>BC카드: 카드 안내장 이미지를 OCR로 인식해 상품 정보를 자동 구조화, 가맹점 정보 AI 보완. 실시간 결제 데이터 기반 맛집 추천, 금융 특화 생성형 AI 플랫폼, 업무 자동화 등 에이전틱 AI 사례를 국제 콘퍼런스에서 발표</li>
+        <li>신한카드: 생성형 AI 상담 지원 시스템을 사내 AI 플랫폼으로 확장해, 고객 소비 패턴과 혜택 정보를 결합한 결제 수단 추천에 활용</li>
+        <li>금융당국 동향: 금융위원회가 은행·카드사·핀테크사의 외부 생성형 AI 활용(고객 상담, 업무 지원)을 혁신금융서비스로 지정하는 사례 증가</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>LLM 오작동 및 부작용 리스크</h3>
+      <p class="learn">왜 LLM이 틀린 답을 확신 있게 내놓는지(환각), 에이전트형 AI가 권한을 넘겨받았을 때 생기는 위험, 보안 관점의 신종 공격 유형</p>
+      <ul>
+        <li>미국 뉴욕의 한 변호사가 챗봇이 지어낸 허위 판례를 법원에 제출했다가 벌금을 부과받은 사건 — 확신에 찬 어조가 오히려 위험한 이유</li>
+        <li>OWASP가 지적한 '과도한 자율성' 리스크: 에이전트가 과도한 권한이나 기능을 부여받으면 부적절한 작업을 실행할 수 있음</li>
+        <li>2026년 보안 업계 보고서 기준, 프롬프트 인젝션이 기업 내부 시스템의 주요 고위험 취약점으로 부상</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>AI Native 조직 구축 체계</h3>
+      <p class="learn">일하는 방식 / 예산 관리 / 거버넌스 — AI 도입이 실패하는 조직의 공통 패턴, 예산·인력 배분 방식, 거버넌스 책임 구조</p>
+      <ul>
+        <li>일하는 방식: "무조건 활용하라"는 강제적 지시는 형식주의를 낳고, 개별 팀원의 노하우가 조직 자산으로 축적되지 않으면 결국 휘발되는 실패 패턴</li>
+        <li>거버넌스 구조: 국내외 금융사는 디지털 기획 조직이 AI 거버넌스 수립을 주도하는 경우가 많고, 체계가 자리 잡은 이후에는 별도 전담 조직으로 분리하는 것이 바람직</li>
+        <li>책임 체계: 배포된 모든 AI 모델에는 실제 책임자를 지정해야 하며, 거버넌스를 중앙집중형·사업부 자율형·혼합형 중 조직 상황에 맞게 선택</li>
+        <li>조직 체계: AI 윤리위원회나 최고AI책임자(CAIO)를 지정하고, 개발·운영 단계별 승인 절차를 두는 방식</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-m2">
+    <div class="page-head">
+      <p class="eyebrow">Module 02</p>
+      <h1>리더를 위한 Claude 익히기</h1>
+      <p>예시 주제 · 리스크관리팀 — 대손충당금 적립 기준 상향 조정</p>
+    </div>
+
+    <div class="turn">
+      <div class="turn-label">Turn 1 · 참석자 요청</div>
+      <div class="request-box">"리스크관리팀 관점에서, 대손충당금 적립 기준을 상향 조정하는 결정을 검토 중이야. 이 결정에서 중요한 변수를 판단해서 슬라이더로 민감도 분석 도구를 만들어줘"</div>
+      <p class="response-note">Claude가 스스로 <b>연체율 가정</b>과 <b>적립률 상향폭</b>을 핵심 변수로 판단해 2슬라이더 도구를 생성합니다.</p>
+
+      <div class="slider-row"><label>연체율 가정</label><input type="range" min="1" max="8" step="0.5" value="3" id="t1-delinq"><span class="val" id="t1-delinq-out">3.0%</span></div>
+      <div class="slider-row"><label>적립률 상향폭</label><input type="range" min="0" max="2" step="0.1" value="0.5" id="t1-hike"><span class="val" id="t1-hike-out">0.5%p</span></div>
+      <div class="metric-grid">
+        <div class="metric-card"><p class="metric-label">추가 충당금 필요액</p><p class="metric-value" id="t1-provision">30억원</p></div>
+        <div class="metric-card"><p class="metric-label">세후 순이익 영향</p><p class="metric-value" id="t1-income">-22.8억원</p></div>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="turn-label">Turn 2 · 참석자 추가 조건</div>
+      <div class="request-box">"경기침체 시나리오도 감안해서 반영해줘"</div>
+      <p class="response-note">Claude는 슬라이더를 추가하는 대신, <b>"경기침체 시나리오" 버튼</b>으로 연체율을 침체기 수준(6.5%)까지 한 번에 이동시키는 방식을 선택합니다. 변수 개수는 늘리지 않습니다.</p>
+    </div>
+
+    <div class="turn">
+      <div class="turn-label">Turn 3 · 참석자 추가 조건</div>
+      <div class="request-box">"우리 부서는 카드자산 비중이 커서 그 부분이 더 크게 반영되면 좋겠어"</div>
+      <p class="response-note">Claude는 화면 구조는 그대로 두고, <b>내부 계산 가중치</b>만 상향 조정합니다.</p>
+
+      <div class="slider-row"><label>연체율 가정</label><input type="range" min="1" max="8" step="0.5" value="3" id="t3-delinq"><span class="val" id="t3-delinq-out">3.0%</span></div>
+      <div class="slider-row"><label>적립률 상향폭</label><input type="range" min="0" max="2" step="0.1" value="0.5" id="t3-hike"><span class="val" id="t3-hike-out">0.5%p</span></div>
+      <button class="preset-btn" id="t3-stress-btn">경기침체 시나리오 보기 (연체율 6.5%로 이동)</button>
+      <div class="metric-grid">
+        <div class="metric-card"><p class="metric-label">추가 충당금 필요액</p><p class="metric-value" id="t3-provision">45억원</p></div>
+        <div class="metric-card"><p class="metric-label">세후 순이익 영향</p><p class="metric-value" id="t3-income">-34.2억원</p></div>
+      </div>
+    </div>
+
+    <table class="summary-table">
+      <tr><th>Turn</th><th>참석자 요청</th><th>Claude의 판단</th></tr>
+      <tr><td>1</td><td>변수 판단 후 슬라이더 도구 요청</td><td>연체율·적립률 상향폭을 핵심 변수로 선정</td></tr>
+      <tr><td>2</td><td>경기침체 시나리오 반영 요청</td><td>슬라이더 추가 대신 프리셋 버튼으로 대응</td></tr>
+      <tr><td>3</td><td>카드자산 비중 반영 요청</td><td>구조는 유지, 계산 가중치만 조정</td></tr>
+    </table>
+  </div>
+
+  <div class="panel" id="panel-m3">
+    <div class="page-head">
+      <p class="eyebrow">Module 03</p>
+      <h1>Projects를 활용한 업무 환경 구축</h1>
+      <p>예시 주제 · 경영지원본부 — 2027년 AX 추진 계획 사업계획서 초안</p>
+    </div>
+
+    <div class="turn">
+      <div class="turn-label">Turn 1 · 참석자 요청</div>
+      <div class="request-box">"[Project: 사내 사업계획서 양식.docx, 톤앤매너 가이드.pdf 업로드 완료] M2에서 정한 전사 AX 확대 방향으로 2027년 경영지원본부 사업계획서 초안을 만들어줘"</div>
+      <p class="response-note">Project에 등록된 양식·톤앤매너를 반영해 초안을 생성합니다.</p>
+      <div class="doc-mock">
+        <p class="doc-title">2027년 경영지원본부 AX 추진 계획</p>
+        <p class="doc-meta">경영지원본부 · 2026.07</p>
+        <p class="doc-section">1. 추진 배경</p>
+        <p class="doc-body">전사 공통 업무 프로세스 자동화를 통해 반복 업무를 절감하고 인력을 고부가 업무로 재배치함.</p>
+        <p class="doc-section">2. 추진 목표</p>
+        <p class="doc-body">부서별 업무 자동화 과제 발굴 및 단계적 확산.</p>
+        <p class="doc-section">3. 예산 및 인력 계획</p>
+        <p class="doc-body">별도 산정 예정.</p>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="turn-label">Turn 2 · 참석자 추가 조건</div>
+      <div class="request-box">"3번 예산 및 인력 계획 섹션을 M2 시나리오 플래너 결과 수치로 구체화해줘"</div>
+      <p class="response-note">M2에서 나온 절감액·손익분기 수치를 그대로 가져와 섹션을 채웁니다.</p>
+      <div class="doc-mock">
+        <p class="doc-section">3. 예산 및 인력 계획</p>
+        <p class="doc-body">초기 투자 3억원, 도입률 50% 기준 연 <span class="diff">2.0억원 절감</span>, 손익분기 <span class="diff">18개월</span> 예상. 인력 3~4명 재배치.</p>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="turn-label">Turn 3 · 참석자 추가 조건</div>
+      <div class="request-box">"이사회 보고용이니 리스크 대응 섹션도 추가해줘"</div>
+      <p class="response-note">기존 초안 구조를 유지한 채 새 섹션만 추가합니다.</p>
+      <div class="doc-mock">
+        <p class="doc-section">4. 리스크 및 대응 방안 <span class="diff">(신규)</span></p>
+        <p class="doc-body">현업 부서 도입 저항 및 개인정보·내부통제 규정 이슈 사전 점검, 단계적 도입으로 전환 리스크 최소화.</p>
+      </div>
+    </div>
+
+    <table class="summary-table">
+      <tr><th>Turn</th><th>참석자 요청</th><th>Claude의 판단</th></tr>
+      <tr><td>1</td><td>Project 자료 기반 초안 생성 요청</td><td>사내 양식·톤앤매너 반영한 기본 구조 생성</td></tr>
+      <tr><td>2</td><td>예산 섹션 구체화 요청</td><td>M2 결과 수치를 그대로 인용해 보완</td></tr>
+      <tr><td>3</td><td>리스크 섹션 추가 요청</td><td>기존 구조 유지, 신규 섹션만 추가</td></tr>
+    </table>
+  </div>
+
+  <div class="panel" id="panel-m4">
+    <div class="page-head">
+      <p class="eyebrow">Module 04</p>
+      <h1>클로드코드를 활용한 바이브코딩</h1>
+      <p>예시 주제 · 경영지원본부 — 계획서 핵심 결정 사항 사전 검증</p>
+    </div>
+
+    <div class="turn">
+      <div class="turn-label">Turn 1 · 참석자 요청</div>
+      <div class="request-box">"경영지원본부 담당자 입장에서 과거 이메일·메신저 형태의 가상 데이터를 만들고, 오늘 판단할 결정 사항을 입력하면 관련 과거 사례를 찾아주는 웹페이지를 만들어줘"</div>
+      <p class="response-note">클로드코드가 더미데이터 파일 생성 → 매칭 웹페이지 코드 작성 → 실행까지 한 번에 진행합니다.</p>
+      <div class="raw-mock"><b>이메일 스레드 — 작년 ERP 고도화 예산 논의</b>
+대리: 이번 ERP 고도화 건 예산 초과 요청 왔습니다.
+팀장: 부서별로 비용을 나눠 분담하는 조건으로 진행하죠.
+대리: 넵, 그렇게 정리하겠습니다.
+
+<b>메신저 — 잡담 및 다른 안건 섞임</b>
+사원: 팀장님 다음 주 워크숍 장소 예약했습니다!
+팀장: 좋아요 감사해요</div>
+    </div>
+
+    <div class="turn">
+      <div class="turn-label">Turn 2 · 참석자 추가 조건</div>
+      <div class="request-box">"핵심 결정 사항 입력해서 실제로 매칭이 되는지 확인해볼게"</div>
+      <p class="response-note">완성된 웹페이지에 M3 계획서의 핵심 결정 사항을 입력해 매칭 결과를 확인합니다.</p>
+      <div class="match-card">
+        <p class="mc-title">입력: 전사 업무자동화 시스템 도입 예산 3억원 편성</p>
+        <p class="mc-body">→ 매칭된 과거 사례: 작년 ERP 고도화 예산 초과 건 — "부서별 비용 분담" 조건으로 정리된 이력 발견</p>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="turn-label">Turn 3 · 참석자 추가 조건</div>
+      <div class="request-box">"매칭이 잘 안 잡히는 항목이 있는데 검색 조건을 좀 완화해줘"</div>
+      <p class="response-note">클로드코드가 매칭 로직(키워드 범위)을 조정해 재실행합니다. 참석자는 코드를 직접 수정하지 않고 요청만 합니다.</p>
+    </div>
+
+    <table class="summary-table">
+      <tr><th>Turn</th><th>참석자 요청</th><th>Claude의 판단</th></tr>
+      <tr><td>1</td><td>더미데이터 생성 + 매칭 웹페이지 제작 요청</td><td>데이터 생성부터 코드 작성·실행까지 한 번에 처리</td></tr>
+      <tr><td>2</td><td>핵심 결정 사항 입력 후 확인</td><td>관련 과거 사례를 찾아 대조 결과 표시</td></tr>
+      <tr><td>3</td><td>매칭 조건 완화 요청</td><td>코드 내 매칭 로직만 조정해 재실행</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll(".nav-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      document.querySelectorAll(".nav-btn").forEach(function(b){ b.classList.remove("active"); });
+      document.querySelectorAll(".panel").forEach(function(p){ p.classList.remove("active"); });
+      btn.classList.add("active");
+      document.getElementById("panel-" + btn.dataset.panel).classList.add("active");
+      window.scrollTo(0,0);
+    });
+  });
+
+  (function(){
+    var delinq = document.getElementById("t1-delinq");
+    var hike = document.getElementById("t1-hike");
+    var delinqOut = document.getElementById("t1-delinq-out");
+    var hikeOut = document.getElementById("t1-hike-out");
+    var provisionOut = document.getElementById("t1-provision");
+    var incomeOut = document.getElementById("t1-income");
+    var SCALE = 20;
+    function update(){
+      var d = parseFloat(delinq.value), h = parseFloat(hike.value);
+      delinqOut.textContent = d.toFixed(1) + "%";
+      hikeOut.textContent = h.toFixed(1) + "%p";
+      var provision = d * h * SCALE;
+      var income = provision * 0.76;
+      provisionOut.textContent = Math.round(provision) + "억원";
+      incomeOut.textContent = "-" + income.toFixed(1) + "억원";
+    }
+    delinq.addEventListener("input", update);
+    hike.addEventListener("input", update);
+    update();
+  })();
+
+  (function(){
+    var delinq = document.getElementById("t3-delinq");
+    var hike = document.getElementById("t3-hike");
+    var delinqOut = document.getElementById("t3-delinq-out");
+    var hikeOut = document.getElementById("t3-hike-out");
+    var provisionOut = document.getElementById("t3-provision");
+    var incomeOut = document.getElementById("t3-income");
+    var stressBtn = document.getElementById("t3-stress-btn");
+    var SCALE = 30;
+    function update(){
+      var d = parseFloat(delinq.value), h = parseFloat(hike.value);
+      delinqOut.textContent = d.toFixed(1) + "%";
+      hikeOut.textContent = h.toFixed(1) + "%p";
+      var provision = d * h * SCALE;
+      var income = provision * 0.76;
+      provisionOut.textContent = Math.round(provision) + "억원";
+      incomeOut.textContent = "-" + income.toFixed(1) + "억원";
+    }
+    stressBtn.addEventListener("click", function(){ delinq.value = 6.5; update(); });
+    delinq.addEventListener("input", update);
+    hike.addEventListener("input", update);
+    update();
+  })();
+</script>
+</body>
+</html>
